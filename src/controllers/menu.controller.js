@@ -17,16 +17,6 @@ const {addValidation,
  * @exports MenuController
  */
 class MenuController {
-    // Singleton instance of the MenuController.
-    // to ensure there is only one instance of the MenuController.
-    static instance;
-
-    constructor() {
-        // Ensure the MenuController is a singleton.
-        if (MenuController.instance) return MenuController.instance;
-        MenuController.instance = this;
-    }
-
     /**
      * Retrieve all items with pagination.
      * @method  GET

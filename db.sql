@@ -79,6 +79,5 @@ VALUES
 ('Pineapple Juice', 'Fresh pineapple juice', 5.49, 6, '2024-01-19 20:00:00', '2024-01-19 20:00:00'),
 ('Diet Cola', 'Low-calorie cola soft drink', 2.49, 7, '2024-01-20 21:00:00', '2024-01-20 21:00:00');
 
-UPDATE users
-SET role ='admin'
-WHERE id = 1;
+INSERT INTO users(username, email, password, role, passResetToken, passResetExpire, createdAt, updatedAt)
+VALUE('admin1', 'admin1@gmail.com', '$2b$10$7AKeB75HA66LMe7r9G0lNuHuOuPlm2c6o/.l/IoOXu0l2gKsBYSWW', 'admin', NULL, NULL, '2024-12-14 13:55:42', '2024-12-14 13:55:42');
