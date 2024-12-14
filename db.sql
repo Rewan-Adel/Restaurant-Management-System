@@ -81,3 +81,4 @@ VALUES
 
 INSERT INTO users(username, email, password, role, passResetToken, passResetExpire, createdAt, updatedAt)
 VALUE('admin1', 'admin1@gmail.com', '$2b$10$7AKeB75HA66LMe7r9G0lNuHuOuPlm2c6o/.l/IoOXu0l2gKsBYSWW', 'admin', NULL, NULL, '2024-12-14 13:55:42', '2024-12-14 13:55:42');
+---password: 123456e
