@@ -199,8 +199,6 @@ exports.markOrderAsCompleted= async (req, res)=>{
         });
         
         if(!order) return failedResponse(res, "Order not found", null, 404);
-        if(order.userID !== req.user.id) 
-            return failedResponse(res, "You are trying to access an order that doesn't belong to you", null, 401);
         
         if(order.status === 'pending'){
             order.status = 'completed';

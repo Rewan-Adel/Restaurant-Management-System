@@ -12,8 +12,6 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 
 - Admins can:
   - Perform CRUD operations on menu items (name, description, price, category).
-  - Filter menu items by category.
-  - Sort menu items by price (ascending/descending).
 
 ### 2. Order Management
 
@@ -21,10 +19,12 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
   - Take orders.
   - Add/remove items from a pending order.
   - Mark orders as complete.
+
 - **Admins** can:
   - View and manage all orders.
   - Check order details and statuses.
-- Automatically mark orders as "expired" if they are still pending 4 hours after creation.
+  - update order status.
+  - View orders report and export as csv file.
 
 ### 3. User Authentication
 
@@ -33,6 +33,21 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
   - **Restaurant staff**.
 - Only authenticated users can access order functionalities.
 
+- **Auth Functionalities**
+  - Register
+  - Login
+  - Forgot Password which send verification code to user via gmail.
+  - Verify the verification code that sent to user's email then reset password.
+
+### 4. Items
+  - Filter menu items by category.
+  - Sort menu items by price (ascending/descending).
+  - Get item details.
+  - Top 10 selling items last 30 days.
+
+### 5. System
+  - Automatically mark orders as "expired" if they are still pending 4 hours after creation.
+
 ---
 
 ## Technical Stack
@@ -40,7 +55,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 - **Backend**: Node.js with Express.js framework.
 - **Database**: MySQL with Sequelize ORM.
 - **Testing**: Focused automated tests for critical endpoints.
-- **API Documentation**: Interactive documentation using Postman and Swagger.
+- **API Documentation**: Interactive documentation using Postman.
 
 ---
 ### Database Schema
@@ -82,7 +97,10 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
      DB_PASS=your_db_password
      DB_NAME=restaurant_db
      TOKEN_SECRET=your_secret_key
-     JWT_EXPIRATION=24h
+     JWT_EXPIRATION=7d
+     EMAIL_SENDER  = your_gmail_acc 
+    EMAIL_PASSWORD = gmail_app_password
+
      ```
 
 4. Start the Server:
@@ -97,47 +115,75 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 
 ## API Documentation
 
-The API is documented using **Swagger** or **Postman**. You can view the documentation interactively:
+The API is documented using **Postman**. You can view the documentation interactively:
 
-- **Swagger**: Visit `/api-docs` (if Swagger is implemented).
-- **Postman**: Import the provided Postman collection from the repository. or visit `https://documenter.getpostman.com/view/25350743/2sAYHzFhaY`
+- **Postman**: Import the provided Postman collection from the repository. or visit `https://www.postman.com/notnull-7187/workspace/restaurant-documentation/collection/25350743-10a07f45-b8c2-4747-a730-e2ab2106bab1?action=share&creator=25350743`
 
 ### Sample Endpoints
 
 #### Menu Management
 1. **Get Top 10 selling items last 30 days**:
    ```http
-   GET /menu/top-selling
+  GET /api/v1/menu/top-selling
    ```
+   - Response:
+     ```json
+      {
+        "success": true,
+        "message": "Top selling items retrieved successfully",
+        "data": {
+          "topItems": [
+            {
+              "itemID": 1,
+              "name": "Classic Burger",
+              "price": 12.99,
+              "totalSold": 150
+            },
+            {
+              "itemID": 2,
+              "name": "Veggie Delight",
+              "price": 9.99,
+              "totalSold": 120
+            }
+          ]
+        }
+
+     }
+     ```
 
 2. **Create Menu Item** (Admins only):
     it 
    ```http
-   POST /menu/admin/add
+   POST /api/v1/menu/admin/add
    ```
-
-   - Request Body:
+    - Response:
      ```json
      {
-       "name": "Classic Burger",
-       "description": "Delicious beef burger with cheese",
-       "price": 12.99,
-       "category": "Burgers"
-     }
-     ```
-   - Response:
-     ```json
-     {
-       "success": true,
-       "message": "Item created successfully",
-       "data": { ... }
+        "success": true,
+        "message": "Top selling items retrieved successfully",
+        "data": {
+          "topItems": [
+            {
+              "itemID": 1,
+              "totalSold": 150,
+              "name": "Classic Burger",
+              "price": 12.99
+            },
+            {
+              "itemID": 2,
+              "totalSold": 120,
+              "name": "Veggie Delight",
+              "price": 9.99
+            }
+          ]
+        }
      }
      ```
 
 2. **Get Menu Items**:
 
    ```http
-   GET /menu?category=Burg&sort=asc
+   GET /api/v1/menu?category=Burg&sort=asc
    ```
 
    - Response:
@@ -148,31 +194,16 @@ The API is documented using **Swagger** or **Postman**. You can view the documen
        "description": "Delicious beef burger with cheese",
        "price": 12.99,
        "category": "Burgers"
-     }
+     },{}, {}, ...
      ]
      ```
 
 #### Order Management
 
-   - Response:
-     ```json
-     {
-       "success": true,
-       "message": "Order created successfully",
-       "data": { 
-            "topItems":[
-              {
-
-              }
-            ]
-        }
-     }
-     ```
-
 1. **Create Order**:
 
    ```http
-   POST /order/new
+   POST /api/v1/order/new
    ```
 
    - Request Body:
@@ -193,29 +224,45 @@ The API is documented using **Swagger** or **Postman**. You can view the documen
      }
      ```
 
-2. **Update Order (Remove Items)**:
+2. **Mark Order as Complete**:
 
    ```http
-   PUT /orders/:orderID/remove-items
+   PUT /api/v1/orders/:orderID/complete
    ```
-
-   - Request Body:
+  - Response:
      ```json
      {
-       "items": [
-         { "itemID": 1, "quantity": 1 }
-       ]
+        "status": true,
+    "message": "Order marked as completed successfully",
+    "data": {
+        "order": {
+            "id": 2,
+            "userID": 2,
+            "total": "22.47",
+            "status": "completed",
+            "number": 1002,
+            "createdAt": "2024-12-05T11:00:00.000Z",
+            "updatedAt": "2024-12-15T22:14:01.265Z",
+            "orderedBy": {
+                "id": 2,
+                "username": "staff 1"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "name": "Classic Burger",
+                    "price": "8.99",
+                    "order_items": {
+                        "price": "4.99",
+                        "quantity": 2
+                    }
+                },
+                {...},{...},...
+            ]
+        }
+    }
      }
      ```
-
-3. **Mark Order as Complete**:
-
-   ```http
-   PUT /orders/:orderID/complete
-   ```
-
----
-
 ## Testing
 
 Run automated tests:
@@ -230,6 +277,3 @@ npm test
 2. Menu get all menu items and get one item.
 
 ---
-### Deployment Link
-
-- [API Live Demo](https://your-deployment-link.com)
