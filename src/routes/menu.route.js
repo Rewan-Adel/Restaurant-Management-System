@@ -4,7 +4,6 @@ const limitRequest  = require('../middlewares/rateLimit');
 const {
     getAllItems,
     getOneItem,
-    filtration,
     createItem,
     updateItem,
     deleteItem,
@@ -14,7 +13,6 @@ const { isAuthenticated, isAdmin } = require('../middlewares/auth');
 
 router.get('/', getAllItems);
 router.get('/item/:itemID', getOneItem);
-router.get('/filter', filtration);
 router.get('/top-selling', topSellingItems);
 
 router.use(isAuthenticated);

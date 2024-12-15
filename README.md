@@ -100,32 +100,36 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 The API is documented using **Swagger** or **Postman**. You can view the documentation interactively:
 
 - **Swagger**: Visit `/api-docs` (if Swagger is implemented).
-- **Postman**: Import the provided Postman collection from the repository.
+- **Postman**: Import the provided Postman collection from the repository. or visit `https://documenter.getpostman.com/view/25350743/2sAYHzFhaY`
 
 ### Sample Endpoints
 
 #### Menu Management
-
-1. **Create Menu Item** (Admins only):
-
+1. **Get Top 10 selling items last 30 days**:
    ```http
-   POST /menu
+   GET /menu/top-selling
+   ```
+
+2. **Create Menu Item** (Admins only):
+    it 
+   ```http
+   POST /menu/admin/add
    ```
 
    - Request Body:
      ```json
      {
-       "name": "Pizza",
-       "description": "Delicious cheese pizza",
+       "name": "Classic Burger",
+       "description": "Delicious beef burger with cheese",
        "price": 12.99,
-       "category": "Main Course"
+       "category": "Burgers"
      }
      ```
    - Response:
      ```json
      {
        "success": true,
-       "message": "Menu item created successfully",
+       "message": "Item created successfully",
        "data": { ... }
      }
      ```
@@ -133,28 +137,42 @@ The API is documented using **Swagger** or **Postman**. You can view the documen
 2. **Get Menu Items**:
 
    ```http
-   GET /menu?category=Main Course&sort=asc
+   GET /menu?category=Burg&sort=asc
    ```
 
    - Response:
      ```json
      [
        {
-         "id": 1,
-         "name": "Pizza",
-         "description": "Delicious cheese pizza",
-         "price": 12.99,
-         "category": "Main Course"
-       }
+       "name": "Classic Burger",
+       "description": "Delicious beef burger with cheese",
+       "price": 12.99,
+       "category": "Burgers"
+     }
      ]
      ```
 
 #### Order Management
 
-1. **Create Order** (Staff only):
+   - Response:
+     ```json
+     {
+       "success": true,
+       "message": "Order created successfully",
+       "data": { 
+            "topItems":[
+              {
+
+              }
+            ]
+        }
+     }
+     ```
+
+1. **Create Order**:
 
    ```http
-   POST /orders
+   POST /order/new
    ```
 
    - Request Body:
@@ -208,8 +226,8 @@ npm test
 
 ### Critical API Endpoints Tested:
 
-1. Menu filtering and sorting.
-2. Order creation and item management.
+1. Auth register and login.
+2. Menu get all menu items and get one item.
 
 ---
 ### Deployment Link

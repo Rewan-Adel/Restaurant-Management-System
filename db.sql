@@ -122,7 +122,6 @@ VALUES
 
 select * from order_items;
 select * from orders;
-
 -- top items at order_items
 select itemID, sum(quantity) as totalSold
 from order_items
@@ -131,7 +130,7 @@ order by totalSold DESC;
 
 -- top 10 selling items last 30 days
 -- items => name, price
--- orders => status, createdAt > 30 days
+-- orders => status
 -- order_items => itemID with sum quantity
 
 SELECT i.name, i.price, oi.itemID, sum(oi.quantity) AS totalSold

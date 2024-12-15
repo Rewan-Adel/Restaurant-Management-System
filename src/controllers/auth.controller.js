@@ -2,7 +2,9 @@ const bcrypt        = require('bcrypt');
 const {User}        = require('../config/Database');
 const generateToken = require('../utils/tokenGenerator');
 const {successResponse, failedResponse, errorResponse} = require('../middlewares/response');
-const {registerValidation, loginValidation} = require('../validation/user.validation');
+const {registerValidation, loginValidation, emailValidation} = require('../validation/user.validation');
+const sendEmail     = require('../utils/sendEmail');
+const e = require('express');
 
 /**
  * Register a new user.
@@ -54,5 +56,68 @@ exports.login = async(req, res) =>{
         return errorResponse(res, error.message);
     };
 };
+/**
+ * Forgot password with email.
+ * @method - POST
+ * @param - req - The request object, which should include the user email in the request body.
+ * @param - res - The response object used to send back the response.
+ * @returns - A JSON response containing:
+ * - `message`: Email sent successfully
+ */
+exports.sendResetPassEmail = async (req, res) => {
+    const { error, value } = emailValidation(req.body);
+    if (error) return failedResponse(res, error.details[0].message);
 
+    const user = await User.findOne({ where: { email: value.email } });
+    if (!user)
+        return failedResponse(res, 'Invalid email address');
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const sendCode = sendEmail(otp, value.email);
+    if (!sendCode) 
+        return failedResponse(res, 'Failed to send email');
 
+    user.passResetToken  = await bcrypt.hash(otp.toString(), 10);
+    user.passResetExpire = Date.now() + 10 * 60 * 1000;
+    await user.save();
+    
+    return successResponse(res, 'verification code is sent, check your inbox');
+};
+/**
+ * Reset password with email.
+ * @method - POST
+ * @param - req - The request object, which should include the verification code and new password in the request body.
+ * @param - res - The response object used to send back the response.
+ * @returns - A JSON response containing:
+ * - `message`: Password reset successfully
+ * - `data`:
+ * - `token`: The JWT token for the user.
+ */
+exports.verifyAndResetPass = async (req, res) => {
+    const { code , newPassword} = req.body;
+    const user = await User.findOne({
+        where:{email: req.body.email }
+    });
+
+    if (!user) 
+        return failedResponse(res, 'Invalid email address');
+    
+    if(user.passResetToken === null){
+        return failedResponse(res, 'You have already reset your password');
+    };
+    console.log(user.passResetToken);
+    console.log(code);
+
+    if ( !await bcrypt.compare(code.toString(), user.passResetToken))
+        return failedResponse(res, 'Invalid Verification code.');
+    
+    if (!newPassword || newPassword.length < 6) 
+        return failedResponse(res, 'Password must be at least 6 characters long');
+    
+    user.password        = req.body.newPassword;  
+    user.passResetToken  = null;
+    user.passResetExpire =  null;
+    await user.save();
+
+    const token =  generateToken(user);
+    return successResponse(res, 'Password reset successfully', { token });
+};

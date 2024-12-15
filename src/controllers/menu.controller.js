@@ -13,7 +13,7 @@ const {addValidation,
 const OrderItems = require('../models/order_items.model');
 
 /**
- * Retrieve all items with pagination.
+ * Retrieve all items with pagination and filtration by category name and price sort.
  * @method  GET
  * @param   {Object} req - The request object, which should include the query parameter `page`.
  * @param   {Object} res - The response object used to send back the response.
@@ -27,20 +27,30 @@ const OrderItems = require('../models/order_items.model');
 */    
 exports.getAllItems = async (req, res) => {
     const page = parseInt(req.query.page) || 1;    
-    const {limit, offset} = pagination(page);                    
+    const {limit, offset} = pagination(page);
+    const category   = req.query.category   || ''; 
+    const sort = req.query.sort || 'ASC'; 
+    const whereClause = category
+    ? isNaN(category) 
+        ? { name: { [Op.like]: `%${category}%` } }
+        : { categoryID: category } 
+    : {};
     try {
-        const items = await Item.findAndCountAll({
+        const items = await Item.findAndCountAll({ 
             limit,
             offset,
-            order: [['createdAt', 'DESC']],
+            include: [{
+                model: Category,
+                as: 'category',
+                required: true,
+                where: whereClause
+                }],
             attributes: { exclude: ['categoryID'] },
-            include:[
-                {model: Category, as : 'category' } 
-            ]
-        }); 
+            order: [['price', sort]] 
+        });
         return successResponse(res, "Items retrieved successfully", {
             items: items.rows,
-            total: items.count,
+            totalItems: items.count,
             totalPages: Math.ceil(items.count / limit),
             currentPage: page
         });
@@ -78,135 +88,6 @@ exports.getOneItem = async (req, res) => {
             console.log(error);
             return errorResponse(res, error.message);
         }
-}
-/**
- * Retrieve a single item by its ID.
- * @method  GET
- * @param   {Object} req - The request object, which should include the query parameter `page`, `category`, and `priceOrder`.
- * @param   {Object} res - The response object used to send back the response.
- * @returns {Object} - A JSON response containing:
- * - `message`: Items retrieved successfully
- * - `data`:
- *  - `items`: The items retrieved from the database (paginated).
- *  - `totalItems`: The total number of items in the database.
- *  - `totalPages`: The total number of pages based on the limit.
- *  - `currentPage`: The current page number.
-*/ 
-exports.filtration= async (req, res) => {
-    const page = parseInt(req.query.page) || 1;    
-    const {limit, offset} = pagination(page);
-    const category   = req.query.category   || ''; 
-    const priceOrder = req.query.priceOrder || 'ASC'; 
-    const whereClause = category
-    ? isNaN(category) 
-        ? { name: { [Op.like]: `%${category}%` } }
-        : { categoryID: category } 
-    : {};
-    try {
-        const items = await Item.findAndCountAll({ 
-            limit,
-            offset,
-            include: [{
-                model: Category,
-                as: 'category',
-                required: true,
-                where: whereClause
-                }],
-            attributes: { exclude: ['categoryID'] },
-            order: [['price', priceOrder]] 
-        });
-        return successResponse(res, "Items retrieved successfully", {
-            items: items.rows,
-            totalItems: items.count,
-            totalPages: Math.ceil(items.count / limit),
-            currentPage: page
-        });
-    } catch (error) {
-        console.log(error);
-        return errorResponse(res, error.message);
-    }
-}
-/**
- * Retrieve a single item by its ID.
- * @method  POST
- * @param   {Object} req - The request object, which should include the item details in the request body.
- * @param   {Object} res - The response object used to send back the response.
- * @returns {Object} - A JSON response containing:
- * - `message`: Item created successfully
- * - `data`:
- *  - `item`: The new item retrieved from the database.
-*/ 
-exports.createItem= async (req, res) => {
-    try {
-        const { value, error } = addValidation(req.body);
-        if (error) return failedResponse(res, error.details[0].message);
-        const isExist = await Item.findOne({ where: { name: value.name } }); 
-        if (isExist) return failedResponse(res, "Item name already exists");
-        const category = await Category.findOne({
-            where: { name: value.category }
-        });
-        if (!category) return failedResponse(res, "Category not found", null, 404);
-        const item = await Item.create({
-            ...value,
-            categoryID: category.id,
-        });
-        
-        return successResponse(res, "Item created successfully", { item });
-    } catch (error) {
-        console.log(error);
-        return errorResponse(res, error.message);
-    }
-}
-/**
- * Retrieve a single item by its ID.
- * @method  PUT
- * @param   {Object} req - The request object, which should include the item details in the request body.
- * @param   {Object} res - The response object used to send back the response.
- * @returns {Object} - A JSON response containing:
- * - `message`: Item updated successfully
- * - `data`:
- *  - `item`: The updated item retrieved from the database.
-*/
-exports.updateItem = async (req, res) => {
-    try {
-        const { itemID } = req.params;
-        if (!itemID) return failedResponse(res, "Item ID is required");
-        
-        const item = await Item.findByPk(itemID);
-        if (!item) return failedResponse(res, "Item not found", null, 404);
-        const { value, error } = updateValidation(req.body); 
-        if (error) return failedResponse(res, error.details[0].message);
-        await Item.update({ ...value }, { where: { id: itemID } })
-        const updatedItem = await Item.findByPk(itemID); 
-        return successResponse(res, "Item updated successfully", { updatedItem });
-    } catch (error) {
-        console.log(error);
-        return errorResponse(res, error.message);
-    }
-}
-/**
- * Retrieve a single item by its ID.
- * @method  DELETE
- * @param   {Object} req - The request object, which should include the item ID in the request params.
- * @param   {Object} res - The response object used to send back the response.
- * @returns {Object} - A JSON response containing:
- *  - `message`: Item deleted successfully
-*/ 
-exports.deleteItem= async (req, res) => {
-    try {
-            const itemID = req.params.itemID;
-            if (!itemID) return failedResponse(res, "Item ID is required");
-
-            const item = await Item.findByPk(itemID); // Find the item.
-            if (!item) return failedResponse(res, "Item not found", null, 404);
-
-            await item.destroy(); // Delete the item.
-            return successResponse(res, "Item deleted successfully");
-
-    } catch (error) {
-        console.log(error);
-        return errorResponse(res, error.message);
-    };
 };
 
 /**
@@ -254,3 +135,88 @@ exports.topSellingItems = async (req, res) => {
         return errorResponse(res, error.message);
     }
 };
+
+/**
+ * Create a new  menu item. (Only admins)
+ * @method  POST
+ * @param   {Object} req - The request object, which should include the item details in the request body.
+ * @param   {Object} res - The response object used to send back the response.
+ * @returns {Object} - A JSON response containing:
+ * - `message`: Item created successfully
+ * - `data`:
+ *  - `item`: The new item retrieved from the database.
+*/ 
+exports.createItem= async (req, res) => {
+    try {
+        const { value, error } = addValidation(req.body);
+        if (error) return failedResponse(res, error.details[0].message);
+        const isExist = await Item.findOne({ where: { name: value.name } }); 
+        if (isExist) return failedResponse(res, "Item name already exists");
+        const category = await Category.findOne({
+            where: { name: value.category }
+        });
+        if (!category) return failedResponse(res, "Category not found", null, 404);
+        const item = await Item.create({
+            ...value,
+            categoryID: category.id,
+        });
+        
+        return successResponse(res, "Item created successfully", { item });
+    } catch (error) {
+        console.log(error);
+        return errorResponse(res, error.message);
+    }
+}
+/**
+ * Update an item by its ID. (Only admins)
+ * @method  PUT
+ * @param   {Object} req - The request object, which should include the item details in the request body.
+ * @param   {Object} res - The response object used to send back the response.
+ * @returns {Object} - A JSON response containing:
+ * - `message`: Item updated successfully
+ * - `data`:
+ *  - `item`: The updated item retrieved from the database.
+*/
+exports.updateItem = async (req, res) => {
+    try {
+        const { itemID } = req.params;
+        if (!itemID) return failedResponse(res, "Item ID is required");
+        
+        const item = await Item.findByPk(itemID);
+        if (!item) return failedResponse(res, "Item not found", null, 404);
+        const { value, error } = updateValidation(req.body); 
+        if (error) return failedResponse(res, error.details[0].message);
+        await Item.update({ ...value }, { where: { id: itemID } })
+        const updatedItem = await Item.findByPk(itemID); 
+        return successResponse(res, "Item updated successfully", { updatedItem });
+    } catch (error) {
+        console.log(error);
+        return errorResponse(res, error.message);
+    }
+}
+/**
+ * Delete an item by its ID. (Only admins)
+ * @method  DELETE
+ * @param   {Object} req - The request object, which should include the item ID in the request params.
+ * @param   {Object} res - The response object used to send back the response.
+ * @returns {Object} - A JSON response containing:
+ *  - `message`: Item deleted successfully
+*/ 
+exports.deleteItem= async (req, res) => {
+    try {
+            const itemID = req.params.itemID;
+            if (!itemID) return failedResponse(res, "Item ID is required");
+
+            const item = await Item.findByPk(itemID); // Find the item.
+            if (!item) return failedResponse(res, "Item not found", null, 404);
+
+            await item.destroy(); // Delete the item.
+            return successResponse(res, "Item deleted successfully");
+
+    } catch (error) {
+        console.log(error);
+        return errorResponse(res, error.message);
+    };
+};
+
+
