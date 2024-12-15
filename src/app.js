@@ -61,6 +61,8 @@ expireOrders();
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
     console.log(`Server listening on port ${port}`);
+}).on('error', (error) => {
+    console.log('Error starting server:', error.message);
 });
 
 module.exports = app;

@@ -142,3 +142,17 @@ GROUP BY i.id, i.name, i.price
 ORDER BY totalSold DESC
 LIMIT 10;
 
+
+-- Order Reports last 30 days
+-- orderID orderTotal itemsQuantity orderDate
+SELECT distinct o.id as orderID,
+o.number,
+o.total as total,
+o.status,
+o.createdAt,
+sum(oi.quantity) as quantity
+FROM orders as o
+JOIN order_items as oi ON o.id = oi.orderID
+where o.createdAt >=  now() - INTERVAL 30 day
+GROUP by o.id
+ORDER BY total DESC;

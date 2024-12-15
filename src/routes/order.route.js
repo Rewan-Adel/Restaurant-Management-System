@@ -9,7 +9,8 @@ const {
     deleteOrder,
     getOrdersByStaff,
     getOneOrderByStaff,
-    markOrderAsCompleted
+    markOrderAsCompleted,
+    report
 } = require('../controllers/order.controller');
 const { isAuthenticated, isAdmin } = require('../middlewares/auth');
 
@@ -27,9 +28,8 @@ router.put('/remove/:orderID', removeItemsFromOrder);
 
 router.use(isAdmin);
 router.get('/admin/all', getAllOrders);
-router.delete('/admin/delete/:orderID', deleteOrder);
 router.get('/admin/one/:orderID', getOneOrder);
 router.put('/admin/mark/:orderID', changeOrderStatus);
-
+router.delete('/admin/delete/:orderID', deleteOrder);
 
 module.exports = router;

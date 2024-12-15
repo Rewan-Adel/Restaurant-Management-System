@@ -1,8 +1,9 @@
-const e = require('express');
+const { Op, Sequelize } = require('sequelize');
 const {User, Order, OrderItem, Item} = require('../config/Database');
 const {failedResponse, successResponse, errorResponse} = require('../middlewares/response');
 const orderNumGenerator = require('../utils/orderNumGenerator');
 const pagination = require('../utils/pagination');
+const csvWriter = require('../utils/csvWriter');
 
 /**
  * Staff take an order from customers
@@ -505,4 +506,65 @@ exports.getAllOrders = async (req, res)=>{
         console.log(error);
         return errorResponse(res, error.message);
     };
+};
+
+/**
+ * Report of orders within a given date range and export as CSV
+ * @param {object} req : Request object , which should include the query parameter `startDate` and `endDate`.
+ * @param {object} res  : Response object used to send back the response.
+ * @returns - A JSON response containing:
+ * - `message`:The CSV file was written successfully
+ * - `data`:
+ * - `report`: The orders retrieved from the database within the date range.
+ */
+exports.report = async (req, res) => {
+    try{
+        const last30Days = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date(last30Days);
+        const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date();
+
+        const orders = await Order.findAll({
+            attributes: [
+                'id',
+                'number',
+                'total',
+                [OrderItem.sequelize.fn('SUM', OrderItem.sequelize.col('quantity')), 'itemsQuantity'],
+                'status',
+                'createdAt'
+            ],
+            where: {
+                createdAt: {
+                    [Op.between]: [startDate, endDate]
+                }
+            },
+            include: [
+                {
+                    model: User,
+                    as: 'orderedBy',
+                    attributes: ['id', 'username'],
+                },
+                {
+                    model: Item, 
+                    as: 'items', 
+                    attributes: [],
+                    through: { 
+                        attributes: [] 
+                    }
+                }
+            ],
+            group: ['Order.id'], 
+            order: [[Sequelize.literal('total'), 'DESC']] 
+        });
+
+        await csvWriter(orders);
+        
+        const ordersCount = orders.length;
+        return successResponse(res, "The CSV file was written successfully", {
+            orders: orders,
+            total: ordersCount,
+        });
+    }catch(error){
+        console.log(error);
+        return errorResponse(res, error.message);
+    }
 };

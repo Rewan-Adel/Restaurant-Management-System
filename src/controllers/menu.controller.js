@@ -1,5 +1,5 @@
 const { Op, Sequelize } = require('sequelize');
-const  { Item, Category, OrderItem, Order } = require('../config/Database');
+const  { Item, Category, Order } = require('../config/Database');
 const pagination = require('../utils/pagination');
 
 const { successResponse,

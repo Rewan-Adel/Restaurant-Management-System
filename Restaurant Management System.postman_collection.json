@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "13ac185b-0dc2-4667-aa3d-1c05407edd09",
 		"name": "Restaurant Management System",
+		"description": "🍔Restaurant Management System API Documentation\n\nSimplified Restaurant Management System API that supports\n\n- menu management.\n    \n- order management.\n    \n- user authentication.\n    \n\n### Authentication\n\nThe API supports authentication using **JWT (JSON Web Tokens)** via the `Authorization` header. Use this method to access protected endpoints.\n\n#### 1\\. JWT in Authorization Header\n\nInclude a valid JWT token in the `Authorization` header for endpoints that require authentication. This method ensures secure access for both mobile and browser clients.\n\n**Example:**\n\n``` json\nAuthorization: Bearer <your_token_here>\n\n ```\n\n---\n\n### Response Format\n\nAll responses follow this structure:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"Optional descriptive message\",\n  \"data\": { ... }\n}\n\n ```\n\n### Error Handling\n\nErrors are returned in the following format:\n\n``` json\n{\n  \"status\": false,\n  \"message\": \"Error description\",\n  \"data\": null\n}\n\n ```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25350743",
 		"_collection_link": "https://notnull-7187.postman.co/workspace/APIs~968c0b9f-5836-49f0-b72c-fef34b3c3df7/collection/25350743-13ac185b-0dc2-4667-aa3d-1c05407edd09?action=share&source=collection_link&creator=25350743"
@@ -38,7 +39,8 @@
 										"admin",
 										"add"
 									]
-								}
+								},
+								"description": "The API endpoint `{{baseUrl}}api/v1/menu/admin/add` is a POST request used to add a new menu item. The request should include a JSON payload in the raw request body type with the following parameters:\n\n- `name` (string): The name of the menu item.\n    \n- `description` (string): Description of the menu item.\n    \n- `category` (string): Category of the menu item.\n    \n- `price` (number): Price of the menu item.\n    \n\n### Response\n\nThe response for this request is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"item\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"number\"\n            },\n            \"name\": {\n              \"type\": \"string\"\n            },\n            \"description\": {\n              \"type\": \"string\"\n            },\n            \"price\": {\n              \"type\": \"number\"\n            },\n            \"categoryID\": {\n              \"type\": \"number\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```\n\nThe response data includes a boolean `status`, a string `message`, and a nested `data` object containing an `item` object with properties such as `id`, `name`, `description`, `price`, `categoryID`, `updatedAt`, and `createdAt`.\n\nAdditionally, related responses from other endpoints of the API return a list of menu items with similar data models, including `id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, and `category` details.\n\nThe response returns a 200 status code upon successful execution."
 							},
 							"response": [
 								{
@@ -56,11 +58,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}api/v1/menu/admin/add",
+											"raw": "http://localhost:8080/api/v1/menu/admin/add",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"menu",
 												"admin",
@@ -595,6 +600,133 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"status\": true,\n    \"message\": \"Item created successfully\",\n    \"data\": {\n        \"item\": {\n            \"id\": 23,\n            \"name\": \"Spaghetti Bolognese\",\n            \"description\": \"paghetti served with a rich and savory meat sauce\",\n            \"price\": 10.8,\n            \"categoryID\": 8,\n            \"updatedAt\": \"2024-12-14T14:03:08.649Z\",\n            \"createdAt\": \"2024-12-14T14:03:08.649Z\"\n        }\n    }\n}"
+								},
+								{
+									"name": "Too many requests",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\"       : \"Burger 21\",\r\n    \"description\": \"Good Burger\",\r\n    \"category\"   : \"Burgers\",\r\n    \"price\"      : 100\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}api/v1/menu/admin/add",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"menu",
+												"admin",
+												"add"
+											]
+										}
+									},
+									"status": "Too Many Requests",
+									"code": 429,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "1"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 15 Dec 2024 14:15:09 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1734273007"
+										},
+										{
+											"key": "Retry-After",
+											"value": "898"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "93"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"5d-2v1MGVKe0ruee+f/uDVNtmjFnJo\""
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Too many requests, please try again after 15 minutes\",\n    \"data\": null\n}"
 								}
 							]
 						},
@@ -630,7 +762,8 @@
 											"value": ""
 										}
 									]
-								}
+								},
+								"description": "### Update Menu Item\n\nThis endpoint allows the admin to update a specific menu item.\n\n#### Request Body\n\n- name (string, required): The name of the menu item.\n    \n- description (string, required): The description of the menu item.\n    \n- category (string, required): The category of the menu item.\n    \n- price (number, required): The price of the menu item.\n    \n\n#### Response\n\nThe response will be a JSON object with the following properties:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"updatedItem\": {\n      \"id\": 0,\n      \"name\": \"\",\n      \"description\": \"\",\n      \"price\": \"\",\n      \"categoryID\": 0,\n      \"createdAt\": \"\",\n      \"updatedAt\": \"\"\n    }\n  }\n}\n\n ```\n\n#### Related Responses\n\nThe response from other endpoints of this API with similar data models includes:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"items\": [\n      {\n        \"id\": 0,\n        \"name\": \"\",\n        \"description\": \"\",\n        \"price\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"category\": {\n          \"id\": 0,\n          \"name\": \"\"\n        }\n      }\n    ],\n    \"totalItems\": 0,\n    \"totalPages\": 0,\n    \"currentPage\": 0\n  }\n}\n\n ```\n\nThe response will have a status code of 200 upon successful update.\n\n#### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"updatedItem\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"number\"\n            },\n            \"name\": {\n              \"type\": \"string\"\n            },\n            \"description\": {\n              \"type\": \"string\"\n            },\n            \"price\": {\n              \"type\": \"string\"\n            },\n            \"categoryID\": {\n              \"type\": \"number\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
 							},
 							"response": [
 								{
@@ -648,11 +781,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}api/v1/menu/admin/update/:itemID",
+											"raw": "http://localhost:8080/api/v1/menu/admin/update/:itemID",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"menu",
 												"admin",
@@ -993,7 +1129,8 @@
 							"name": "delete item from menu",
 							"request": {
 								"method": "DELETE",
-								"header": []
+								"header": [],
+								"description": "\n### DELETE Request\n\nThis endpoint is used to delete a resource.\n\n#### Request Body\nThis request does not require a request body.\n\n#### Response\nThe response for this request is a JSON object with the following schema:\n\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"null\"\n    }\n  }\n}\n```\n"
 							},
 							"response": [
 								{
@@ -1002,11 +1139,14 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}api/v1/menu/admin/delete/:itemID",
+											"raw": "http://localhost:8080/api/v1/menu/admin/delete/:itemID",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"menu",
 												"admin",
@@ -1216,207 +1356,8 @@
 								}
 							]
 						}
-					]
-				},
-				{
-					"name": "Get All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}api/v1/menu?page=2",
-							"host": [
-								"{{baseUrl}}api"
-							],
-							"path": [
-								"v1",
-								"menu"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "2"
-								}
-							]
-						},
-						"description": "### API Request Description\n\nThis API endpoint makes an HTTP GET request to retrieve the menu items for a specific page.\n\n### Response\n\nThe response for this request can be documented as a JSON schema as follows:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"items\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"itemID\": {\n                                \"type\": \"integer\"\n                            },\n                            \"name\": {\n                                \"type\": \"string\"\n                            },\n                            \"description\": {\n                                \"type\": \"string\"\n                            },\n                            \"price\": {\n                                \"type\": \"string\"\n                            },\n                            \"categoryID\": {\n                                \"type\": \"integer\"\n                            },\n                            \"createdAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"updatedAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"category\": {\n                                \"type\": \"object\",\n                                \"properties\": {\n                                    \"categoryID\": {\n                                        \"type\": \"integer\"\n                                    },\n                                    \"name\": {\n                                        \"type\": \"string\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                },\n                \"totalItems\": {\n                    \"type\": \"integer\"\n                },\n                \"totalPages\": {\n                    \"type\": \"integer\"\n                },\n                \"currentPage\": {\n                    \"type\": \"integer\"\n                }\n            }\n        }\n    }\n}\n\n ```"
-					},
-					"response": [
-						{
-							"name": "example 1",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}api/v1/menu?page=2",
-									"host": [
-										"{{baseUrl}}api"
-									],
-									"path": [
-										"v1",
-										"menu"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "2136"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"858-tyqqJNhGlu4WjnzTxAESeanwUAI\""
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 14 Dec 2024 13:22:06 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"Items retrieved successfully\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 11,\n                \"name\": \"Latte\",\n                \"description\": \"Creamy latte coffee\",\n                \"price\": \"4.49\",\n                \"createdAt\": \"2024-01-10T11:00:00.000Z\",\n                \"updatedAt\": \"2024-01-10T11:00:00.000Z\",\n                \"category\": {\n                    \"id\": 5,\n                    \"name\": \"Coffee\"\n                }\n            },\n            {\n                \"id\": 10,\n                \"name\": \"Americano\",\n                \"description\": \"Hot Americano coffee\",\n                \"price\": \"3.99\",\n                \"createdAt\": \"2024-01-09T10:00:00.000Z\",\n                \"updatedAt\": \"2024-01-09T10:00:00.000Z\",\n                \"category\": {\n                    \"id\": 5,\n                    \"name\": \"Coffee\"\n                }\n            },\n            {\n                \"id\": 9,\n                \"name\": \"Greek Salad\",\n                \"description\": \"Greek salad with olives and feta cheese\",\n                \"price\": \"8.49\",\n                \"createdAt\": \"2024-01-08T19:00:00.000Z\",\n                \"updatedAt\": \"2024-01-08T19:00:00.000Z\",\n                \"category\": {\n                    \"id\": 4,\n                    \"name\": \"Salads\"\n                }\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Caesar Salad\",\n                \"description\": \"Caesar salad with croutons and dressing\",\n                \"price\": \"9.49\",\n                \"createdAt\": \"2024-01-07T18:00:00.000Z\",\n                \"updatedAt\": \"2024-01-07T18:00:00.000Z\",\n                \"category\": {\n                    \"id\": 4,\n                    \"name\": \"Salads\"\n                }\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Grilled Cheese\",\n                \"description\": \"Classic grilled cheese sandwich\",\n                \"price\": \"5.49\",\n                \"createdAt\": \"2024-01-06T17:00:00.000Z\",\n                \"updatedAt\": \"2024-01-06T17:00:00.000Z\",\n                \"category\": {\n                    \"id\": 3,\n                    \"name\": \"Sandwiches\"\n                }\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Turkey Sandwich\",\n                \"description\": \"Fresh turkey sandwich with mayo\",\n                \"price\": \"6.99\",\n                \"createdAt\": \"2024-01-05T16:00:00.000Z\",\n                \"updatedAt\": \"2024-01-05T16:00:00.000Z\",\n                \"category\": {\n                    \"id\": 3,\n                    \"name\": \"Sandwiches\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Veggie Pizza\",\n                \"description\": \"Pizza with fresh vegetables\",\n                \"price\": \"10.99\",\n                \"createdAt\": \"2024-01-04T15:00:00.000Z\",\n                \"updatedAt\": \"2024-01-04T15:00:00.000Z\",\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"Pizza\"\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Pepperoni Pizza\",\n                \"description\": \"Classic pepperoni with mozzarella cheese\",\n                \"price\": \"12.99\",\n                \"createdAt\": \"2024-01-03T14:00:00.000Z\",\n                \"updatedAt\": \"2024-01-03T14:00:00.000Z\",\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"Pizza\"\n                }\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Chicken Burger\",\n                \"description\": \"Grilled chicken burger with lettuce\",\n                \"price\": \"7.49\",\n                \"createdAt\": \"2024-01-02T13:00:00.000Z\",\n                \"updatedAt\": \"2024-01-02T13:00:00.000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"name\": \"Burgers\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Classic Burger\",\n                \"description\": \"Delicious beef burger with cheese\",\n                \"price\": \"8.99\",\n                \"createdAt\": \"2024-01-01T12:00:00.000Z\",\n                \"updatedAt\": \"2024-01-01T12:00:00.000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"name\": \"Burgers\"\n                }\n            }\n        ],\n        \"total\": 21,\n        \"totalPages\": 3,\n        \"currentPage\": 2\n    }\n}"
-						},
-						{
-							"name": "example 2",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}api/v1/menu?page=3",
-									"host": [
-										"{{baseUrl}}api"
-									],
-									"path": [
-										"v1",
-										"menu"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "327"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"147-+xnskZJK08XHFxgq3PEFOvNUDac\""
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 14 Dec 2024 13:22:36 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"Items retrieved successfully\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 2,\n                \"name\": \"Hot Burger\",\n                \"description\": \"Delicious beef burger with Hot souce\",\n                \"price\": \"9.99\",\n                \"createdAt\": \"2024-01-01T12:00:00.000Z\",\n                \"updatedAt\": \"2024-01-01T12:00:00.000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"name\": \"Burgers\"\n                }\n            }\n        ],\n        \"total\": 21,\n        \"totalPages\": 3,\n        \"currentPage\": 3\n    }\n}"
-						},
-						{
-							"name": "example 3",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}api/v1/menu?page=4",
-									"host": [
-										"{{baseUrl}}api"
-									],
-									"path": [
-										"v1",
-										"menu"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "4"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "118"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"76-C1F9Efyh7s9Fi6bU9IuvuebM0JI\""
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 14 Dec 2024 13:22:56 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"Items retrieved successfully\",\n    \"data\": {\n        \"items\": [],\n        \"total\": 21,\n        \"totalPages\": 3,\n        \"currentPage\": 4\n    }\n}"
-						}
-					]
+					],
+					"description": "Folder for admin menu management"
 				},
 				{
 					"name": "Get One",
@@ -1437,10 +1378,11 @@
 							"variable": [
 								{
 									"key": "itemID",
-									"value": "1"
+									"value": ""
 								}
 							]
-						}
+						},
+						"description": "### Get Menu Item Details\n\nThis endpoint retrieves the details of a specific menu item identified by its `itemID`.\n\n#### Request\n\n- Method: GET\n    \n- Endpoint: `{{baseUrl}}api/v1/menu/item/:itemID`\n    \n\n#### Response\n\nThe response will include the following fields:\n\n- `status` (boolean): Indicates the success or failure of the request.\n    \n- `message` (string): Provides additional information about the request status.\n    \n- `data` (object): Contains the details of the menu item.\n    \n    - `item` (object): Represents the menu item with the following attributes:\n        \n        - `id` (number): The unique identifier of the item.\n            \n        - `name` (string): The name of the item.\n            \n        - `description` (string): The description of the item.\n            \n        - `price` (string): The price of the item.\n            \n        - `createdAt` (string): The timestamp of item creation.\n            \n        - `updatedAt` (string): The timestamp of item update.\n            \n        - `category` (object): Represents the category of the item with the following attributes:\n            \n            - `id` (number): The unique identifier of the category.\n                \n            - `name` (string): The name of the category.\n                \n\n#### Related Responses\n\nThe response from other endpoints of this API with similar data models includes an array of menu items (`items`) along with additional pagination details such as `totalItems`, `totalPages`, and `currentPage`.\n\nExample Response:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"item\": {\n      \"id\": 0,\n      \"name\": \"\",\n      \"description\": \"\",\n      \"price\": \"\",\n      \"createdAt\": \"\",\n      \"updatedAt\": \"\",\n      \"category\": {\n        \"id\": 0,\n        \"name\": \"\"\n      }\n    }\n  }\n}\n\n ```"
 					},
 					"response": [
 						{
@@ -1449,11 +1391,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}api/v1/menu/item/:itemID",
+									"raw": "http://localhost:8080/api/v1/menu/item/:itemID",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}api"
+										"localhost"
 									],
+									"port": "8080",
 									"path": [
+										"api",
 										"v1",
 										"menu",
 										"item",
@@ -1566,32 +1511,32 @@
 					]
 				},
 				{
-					"name": "Filter",
+					"name": "Get All or Filter",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}api/v1/menu/filter?category=co&priceOrder=DESC",
+							"raw": "{{baseUrl}}api/v1/menu?category=&sort=",
 							"host": [
 								"{{baseUrl}}api"
 							],
 							"path": [
 								"v1",
-								"menu",
-								"filter"
+								"menu"
 							],
 							"query": [
 								{
 									"key": "category",
-									"value": "co",
+									"value": "",
 									"description": "id or name"
 								},
 								{
-									"key": "priceOrder",
-									"value": "DESC"
+									"key": "sort",
+									"value": ""
 								}
 							]
-						}
+						},
+						"description": "The API endpoint retrieves a list of menu items based on the provided category and sorting parameters.\n\n### Response\n\nThe response will be a JSON object with the following properties:\n\n- `status` (boolean): Indicates the status of the request.\n    \n- `message` (string): Provides any additional information related to the request.\n    \n- `data` (object): Contains the data related to the menu items.\n    \n    - `items` (array): An array of menu items, each containing the following properties:\n        \n        - `id` (number): The unique identifier of the menu item.\n            \n        - `name` (string): The name of the menu item.\n            \n        - `description` (string): A brief description of the menu item.\n            \n        - `price` (string): The price of the menu item.\n            \n        - `createdAt` (string): The timestamp indicating the creation date of the menu item.\n            \n        - `updatedAt` (string): The timestamp indicating the last update date of the menu item.\n            \n        - `category` (object): Contains information about the category of the menu item.\n            \n            - `id` (number): The unique identifier of the category.\n                \n            - `name` (string): The name of the category.\n                \n- `totalItems` (number): The total number of menu items available.\n    \n- `totalPages` (number): The total number of pages based on the available menu items.\n    \n- `currentPage` (number): The current page number of the retrieved menu items.\n    \n\nExample Response:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"items\": [\n      {\n        \"id\": 0,\n        \"name\": \"\",\n        \"description\": \"\",\n        \"price\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"category\": {\n          \"id\": 0,\n          \"name\": \"\"\n        }\n      }\n    ],\n    \"totalItems\": 0,\n    \"totalPages\": 0,\n    \"currentPage\": 0\n  }\n}\n\n ```\n\nThis request returns a 200 status code upon successful execution."
 					},
 					"response": [
 						{
@@ -1600,11 +1545,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}api/v1/menu/filter?category=co&priceOrder=DESC",
+									"raw": "http://localhost:8080/api/v1/menu/filter?category=co&priceOrder=DESC",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}api"
+										"localhost"
 									],
+									"port": "8080",
 									"path": [
+										"api",
 										"v1",
 										"menu",
 										"filter"
@@ -1729,25 +1677,132 @@
 					]
 				},
 				{
-					"name": "New Request",
+					"name": "Top Selling",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}api/v1/menu/top",
+							"raw": "{{baseUrl}}api/v1/menu/top-selling",
 							"host": [
 								"{{baseUrl}}api"
 							],
 							"path": [
 								"v1",
 								"menu",
-								"top"
+								"top-selling"
 							]
-						}
+						},
+						"description": "### GET /api/v1/menu/top-selling\n\nThis endpoint retrieves the top-selling items from the menu.\n\n#### Request\n\nNo request body is required for this endpoint.\n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"topItems\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"itemID\": {\n                \"type\": \"integer\"\n              },\n              \"totalSold\": {\n                \"type\": \"string\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```\n\n#### Related Responses\n\nThe responses from other endpoints within the API have a similar data model, including items, totalItems, totalPages, currentPage, and category information."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "example 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/menu/top-selling",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"top-selling"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "482"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e2-5XN7gWudWe6/GuHjdJCq6n5madw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2024 13:59:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Top selling items retrieved successfully\",\n    \"data\": {\n        \"topItems\": [\n            {\n                \"itemID\": 1,\n                \"totalSold\": \"11\",\n                \"name\": \"Classic Burger\",\n                \"price\": \"8.99\"\n            },\n            {\n                \"itemID\": 4,\n                \"totalSold\": \"9\",\n                \"name\": \"Pepperoni Pizza\",\n                \"price\": \"12.99\"\n            },\n            {\n                \"itemID\": 14,\n                \"totalSold\": \"2\",\n                \"name\": \"Cola\",\n                \"price\": \"2.49\"\n            },\n            {\n                \"itemID\": 2,\n                \"totalSold\": \"1\",\n                \"name\": \"Hot Burger\",\n                \"price\": \"9.99\"\n            },\n            {\n                \"itemID\": 10,\n                \"totalSold\": \"1\",\n                \"name\": \"Americano\",\n                \"price\": \"3.99\"\n            },\n            {\n                \"itemID\": 8,\n                \"totalSold\": \"1\",\n                \"name\": \"Caesar Salad\",\n                \"price\": \"9.49\"\n            }\n        ]\n    }\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "Folder for menu management"
 		},
 		{
 			"name": "Order",
@@ -1789,7 +1844,8 @@
 										"order",
 										"new"
 									]
-								}
+								},
+								"description": "The API endpoint `{{baseUrl}}api/v1/order/new` is a POST request used to create a new order. The request should include a payload with the raw request body type, containing an array of items with their respective itemID and quantity.\n\n### Request Body\n\n- `items` (array): An array of objects containing the `itemID` (number) and `quantity` (number) for each item in the order.\n    \n\n#### Example\n\n``` json\n{\n    \"items\": [\n        {\n            \"itemID\": 10,\n            \"quantity\": 6\n        }\n    ]\n}\n\n ```\n\n### Response\n\nThe response for this request is a JSON object with the following schema:\n\n``` json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"data\": {\n        \"order\": {\n            \"id\": 0,\n            \"userID\": 0,\n            \"total\": \"\",\n            \"status\": \"\",\n            \"number\": 0,\n            \"createdAt\": \"\",\n            \"updatedAt\": \"\",\n            \"orderedBy\": {\n                \"id\": 0,\n                \"username\": \"\"\n            },\n            \"items\": [\n                {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"price\": \"\",\n                    \"order_items\": {\n                        \"price\": \"\",\n                        \"quantity\": 0\n                    }\n                }\n            ]\n        }\n    }\n}\n\n ```\n\n### Related Responses\n\nCalls to other endpoints of this API returned similar data models, such as the response below:\n\n``` json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 0,\n                \"name\": \"\",\n                \"description\": \"\",\n                \"price\": \"\",\n                \"createdAt\": \"\",\n                \"updatedAt\": \"\",\n                \"category\": {\n                    \"id\": 0,\n                    \"name\": \"\"\n                }\n            }\n        ],\n        \"totalItems\": 0,\n        \"totalPages\": 0,\n        \"currentPage\": 0\n    }\n}\n\n ```\n\nThe response returns a status code of 200 upon successful execution of the request."
 							},
 							"response": [
 								{
@@ -1807,11 +1863,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}api/v1/order/new",
+											"raw": "http://localhost:8080/api/v1/order/new",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"order",
 												"new"
@@ -2046,9 +2105,121 @@
 											"value": "5"
 										}
 									]
-								}
+								},
+								"description": "The endpoint makes an HTTP PUT request to complete an order with the specified orderID. The response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"order\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"integer\"\n            },\n            \"userID\": {\n              \"type\": \"integer\"\n            },\n            \"total\": {\n              \"type\": \"string\"\n            },\n            \"status\": {\n              \"type\": \"string\"\n            },\n            \"number\": {\n              \"type\": \"integer\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            },\n            \"orderedBy\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"id\": {\n                  \"type\": \"integer\"\n                },\n                \"username\": {\n                  \"type\": \"string\"\n                }\n              }\n            },\n            \"items\": {\n              \"type\": \"array\",\n              \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"price\": {\n                    \"type\": \"string\"\n                  },\n                  \"order_items\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                      \"price\": {\n                        \"type\": \"string\"\n                      },\n                      \"quantity\": {\n                        \"type\": \"integer\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
 							},
 							"response": [
+								{
+									"name": "example 1",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/order/complete/:orderID",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"order",
+												"complete",
+												":orderID"
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "463"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1cf-9V/cbndxopplmRG/tWaUu2AD3ro\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 14 Dec 2024 14:57:58 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Order marked as completed successfully\",\n    \"data\": {\n        \"order\": {\n            \"id\": 5,\n            \"userID\": 2,\n            \"total\": \"28.95\",\n            \"status\": \"completed\",\n            \"number\": 347182,\n            \"createdAt\": \"2024-12-14T14:57:06.000Z\",\n            \"updatedAt\": \"2024-12-14T14:57:58.866Z\",\n            \"orderedBy\": {\n                \"id\": 2,\n                \"username\": \"staff 1\"\n            },\n            \"items\": [\n                {\n                    \"id\": 11,\n                    \"name\": \"Latte\",\n                    \"price\": \"4.49\",\n                    \"order_items\": {\n                        \"price\": \"71.84\",\n                        \"quantity\": 4\n                    }\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Veggie Pizza\",\n                    \"price\": \"10.99\",\n                    \"order_items\": {\n                        \"price\": \"10.99\",\n                        \"quantity\": 1\n                    }\n                }\n            ]\n        }\n    }\n}"
+								},
 								{
 									"name": "example 2",
 									"originalRequest": {
@@ -2156,114 +2327,6 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
-								},
-								{
-									"name": "example 1",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}api/v1/order/complete/:orderID",
-											"host": [
-												"{{baseUrl}}api"
-											],
-											"path": [
-												"v1",
-												"order",
-												"complete",
-												":orderID"
-											],
-											"variable": [
-												{
-													"key": "orderID",
-													"value": "5"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Security-Policy",
-											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
-										},
-										{
-											"key": "Cross-Origin-Opener-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Cross-Origin-Resource-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Origin-Agent-Cluster",
-											"value": "?1"
-										},
-										{
-											"key": "Referrer-Policy",
-											"value": "no-referrer"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=31536000; includeSubDomains"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "X-DNS-Prefetch-Control",
-											"value": "off"
-										},
-										{
-											"key": "X-Download-Options",
-											"value": "noopen"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Permitted-Cross-Domain-Policies",
-											"value": "none"
-										},
-										{
-											"key": "X-XSS-Protection",
-											"value": "0"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "463"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"1cf-9V/cbndxopplmRG/tWaUu2AD3ro\""
-										},
-										{
-											"key": "Date",
-											"value": "Sat, 14 Dec 2024 14:57:58 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"status\": true,\n    \"message\": \"Order marked as completed successfully\",\n    \"data\": {\n        \"order\": {\n            \"id\": 5,\n            \"userID\": 2,\n            \"total\": \"28.95\",\n            \"status\": \"completed\",\n            \"number\": 347182,\n            \"createdAt\": \"2024-12-14T14:57:06.000Z\",\n            \"updatedAt\": \"2024-12-14T14:57:58.866Z\",\n            \"orderedBy\": {\n                \"id\": 2,\n                \"username\": \"staff 1\"\n            },\n            \"items\": [\n                {\n                    \"id\": 11,\n                    \"name\": \"Latte\",\n                    \"price\": \"4.49\",\n                    \"order_items\": {\n                        \"price\": \"71.84\",\n                        \"quantity\": 4\n                    }\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Veggie Pizza\",\n                    \"price\": \"10.99\",\n                    \"order_items\": {\n                        \"price\": \"10.99\",\n                        \"quantity\": 1\n                    }\n                }\n            ]\n        }\n    }\n}"
 								}
 							]
 						},
@@ -2292,7 +2355,8 @@
 										"order",
 										"all"
 									]
-								}
+								},
+								"description": "### GET /api/v1/order/all\n\nThis endpoint retrieves all orders.\n\n#### Request\n\nThis is a GET request to the endpoint `{{baseUrl}}api/v1/order/all`.\n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"orders\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"total\": {\n                \"type\": \"string\"\n              },\n              \"status\": {\n                \"type\": \"string\"\n              },\n              \"number\": {\n                \"type\": \"integer\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"orderedBy\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"username\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"items\": {\n                \"type\": \"array\",\n                \"items\": {}\n              }\n            }\n          }\n        },\n        \"total\": {\n          \"type\": \"integer\"\n        },\n        \"currentPage\": {\n          \"type\": \"integer\"\n        },\n        \"totalPages\": {\n          \"type\": \"integer\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\nThe response will have a status code of 200.\n\n#### Related Responses\n\nOther endpoints in the API return similar data models, such as the response from the items endpoint:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"items\": [\n      {\n        \"id\": 0,\n        \"name\": \"\",\n        \"description\": \"\",\n        \"price\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"category\": {\n          \"id\": 0,\n          \"name\": \"\"\n        }\n      }\n    ],\n    \"totalItems\": 0,\n    \"totalPages\": 0,\n    \"currentPage\": 0\n  }\n}\n\n ```"
 							},
 							"response": [
 								{
@@ -2399,7 +2463,7 @@
 							]
 						},
 						{
-							"name": "Get One",
+							"name": "Get One Order",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2430,7 +2494,8 @@
 											"value": "5"
 										}
 									]
-								}
+								},
+								"description": "# Retrieve Order Details\n\nThis endpoint retrieves the details of a specific order identified by the provided `orderID`.\n\n## Request\n\n- Method: GET\n    \n- Endpoint: `{{baseUrl}}api/v1/order/one/:orderID`\n    \n\n### Path Parameters\n\n- `orderID` (integer): The unique identifier of the order to retrieve.\n    \n\n### Headers\n\nNo specific headers are required for this request.\n\n### Response\n\nThe response will contain the following fields:\n\n- `status` (boolean): Indicates the success or failure of the request.\n    \n- `message` (string): A message related to the request.\n    \n- `data` (object): An object containing the details of the retrieved order.\n    \n\n#### Order Object\n\n- `id` (integer): The unique identifier of the order.\n    \n- `userID` (integer): The user ID associated with the order.\n    \n- `total` (string): The total amount of the order.\n    \n- `status` (string): The status of the order.\n    \n- `number` (integer): The order number.\n    \n- `createdAt` (string): The date and time of order creation.\n    \n- `updatedAt` (string): The date and time of the last update to the order.\n    \n- `orderedBy` (object): An object containing details of the user who placed the order.\n    \n    - `id` (integer): The unique identifier of the user.\n        \n    - `username` (string): The username of the user.\n        \n- `items` (array): An array of items included in the order, each containing the following details:\n    \n    - `id` (integer): The unique identifier of the item.\n        \n    - `name` (string): The name of the item.\n        \n    - `price` (string): The price of the item.\n        \n    - `order_items` (object): An object containing the price and quantity of the item in the order.\n        \n        - `price` (string): The price of the item in the order.\n            \n        - `quantity` (integer): The quantity of the item in the order.\n            \n\nIn case of an empty `items` array, the response will still contain the order details with an empty array for items.\n\n## Example\n\n### Request\n\n```\nGET {{baseUrl}}api/v1/order/one/123\n\n ```\n\n### Response\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"order\": {\n      \"id\": 123,\n      \"userID\": 456,\n      \"total\": \"100.00\",\n      \"status\": \"pending\",\n      \"number\": 789,\n      \"createdAt\": \"2022-01-01T12:00:00Z\",\n      \"updatedAt\": \"2022-01-02T10:00:00Z\",\n      \"orderedBy\": {\n        \"id\": 456,\n        \"username\": \"user123\"\n      },\n      \"items\": [\n        {\n          \"id\": 1,\n          \"name\": \"Product A\",\n          \"price\": \"50.00\",\n          \"order_items\": {\n            \"price\": \"50.00\",\n            \"quantity\": 2\n          }\n        },\n        {\n          \"id\": 2,\n          \"name\": \"Product B\",\n          \"price\": \"25.00\",\n          \"order_items\": {\n            \"price\": \"25.00\",\n            \"quantity\": 1\n          }\n        }\n      ]\n    }\n  }\n}\n\n ```"
 							},
 							"response": [
 								{
@@ -2689,7 +2754,8 @@
 											"value": "2"
 										}
 									]
-								}
+								},
+								"description": "### Get Order Details by ID\n\nThis endpoint retrieves the details of a specific order identified by the provided order ID.\n\n#### Request\n\n- Method: GET\n    \n- Endpoint: `{{baseUrl}}api/v1/order/admin/one/:orderID`\n    \n\n#### Response\n\nThe response for this request can be represented by the following JSON schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"order\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"integer\"\n            },\n            \"total\": {\n              \"type\": \"string\"\n            },\n            \"status\": {\n              \"type\": \"string\"\n            },\n            \"number\": {\n              \"type\": \"integer\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            },\n            \"userID\": {\n              \"type\": \"integer\"\n            },\n            \"orderedBy\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"id\": {\n                  \"type\": \"integer\"\n                },\n                \"username\": {\n                  \"type\": \"string\"\n                }\n              }\n            },\n            \"items\": {\n              \"type\": \"array\",\n              \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"price\": {\n                    \"type\": \"string\"\n                  },\n                  \"order_items\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                      \"price\": {\n                        \"type\": \"string\"\n                      },\n                      \"quantity\": {\n                        \"type\": \"integer\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```\n\n#### Related Responses\n\nThe response from other endpoints of this API, which can be used as related responses, have similar data models. For example, a response with items, totalItems, totalPages, and currentPage properties."
 							},
 							"response": [
 								{
@@ -3048,7 +3114,8 @@
 											"value": ""
 										}
 									]
-								}
+								},
+								"description": "### Get All Admin Orders\n\nThis endpoint retrieves all orders for the admin.\n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"orders\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"id\": {\n                                \"type\": \"integer\"\n                            },\n                            \"total\": {\n                                \"type\": \"string\"\n                            },\n                            \"status\": {\n                                \"type\": \"string\"\n                            },\n                            \"number\": {\n                                \"type\": \"integer\"\n                            },\n                            \"createdAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"updatedAt\": {\n                                \"type\": \"string\"\n                            }\n                        }\n                    }\n                },\n                \"total\": {\n                    \"type\": \"integer\"\n                },\n                \"currentPage\": {\n                    \"type\": \"integer\"\n                },\n                \"totalPages\": {\n                    \"type\": \"integer\"\n                }\n            }\n        }\n    }\n}\n\n ```"
 							},
 							"response": [
 								{
@@ -3512,121 +3579,13 @@
 									"variable": [
 										{
 											"key": "orderID",
-											"value": "4"
+											"value": ""
 										}
 									]
-								}
+								},
+								"description": "### Delete Order by ID\n\nThis endpoint is used to delete a specific order by its ID.\n\n#### Response\n\nThe response for this request will be a JSON object with the following properties:\n\n- `status` (boolean): Indicates the success or failure of the request.\n    \n- `message` (string): Provides additional information about the request status.\n    \n- `data` (object): Contains the response data which may include the following properties:\n    \n    - `items` (array): An array of items associated with the order, each containing the following properties:\n        \n        - `id` (number): The ID of the item.\n            \n        - `name` (string): The name of the item.\n            \n        - `description` (string): The description of the item.\n            \n        - `price` (string): The price of the item.\n            \n        - `createdAt` (string): The date and time when the item was created.\n            \n        - `updatedAt` (string): The date and time when the item was last updated.\n            \n        - `category` (object): An object representing the category of the item, containing the following properties:\n            \n            - `id` (number): The ID of the category.\n                \n            - `name` (string): The name of the category.\n                \n    - `totalItems` (number): The total number of items associated with the order.\n        \n    - `totalPages` (number): The total number of pages for the items.\n        \n    - `currentPage` (number): The current page number.\n        \n\n#### Example\n\n``` json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"data\": null\n}\n\n ```"
 							},
 							"response": [
-								{
-									"name": "example 2",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
-											"host": [
-												"{{baseUrl}}api"
-											],
-											"path": [
-												"v1",
-												"order",
-												"admin",
-												"delete",
-												":orderID"
-											],
-											"variable": [
-												{
-													"key": "orderID",
-													"value": "4"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Security-Policy",
-											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
-										},
-										{
-											"key": "Cross-Origin-Opener-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Cross-Origin-Resource-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Origin-Agent-Cluster",
-											"value": "?1"
-										},
-										{
-											"key": "Referrer-Policy",
-											"value": "no-referrer"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=31536000; includeSubDomains"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "X-DNS-Prefetch-Control",
-											"value": "off"
-										},
-										{
-											"key": "X-Download-Options",
-											"value": "noopen"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Permitted-Cross-Domain-Policies",
-											"value": "none"
-										},
-										{
-											"key": "X-XSS-Protection",
-											"value": "0"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "56"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"38-D6kLX8I1MW3r8q0P/UEJCX5tkJg\""
-										},
-										{
-											"key": "Date",
-											"value": "Sat, 14 Dec 2024 14:36:01 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
-								},
 								{
 									"name": "example 1",
 									"originalRequest": {
@@ -3735,6 +3694,115 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"status\": true,\n    \"message\": \"Order deleted successfully\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "example 2",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"delete",
+												":orderID"
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "4"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "56"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"38-D6kLX8I1MW3r8q0P/UEJCX5tkJg\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 14 Dec 2024 14:36:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
 								}
 							]
 						},
@@ -3780,9 +3848,375 @@
 											"value": ""
 										}
 									]
-								}
+								},
+								"description": "### Update Order Status\n\nThis endpoint allows the admin to update the status of a specific order.\n\n#### Request\n\n- Method: PUT\n    \n- URL: `{{baseUrl}}api/v1/order/admin/mark/:orderID`\n    \n\n##### Request Body\n\n- Type: JSON\n    \n    - `status` (string, required): The updated status of the order.\n        \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"items\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"category\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"totalItems\": {\n          \"type\": \"integer\"\n        },\n        \"totalPages\": {\n          \"type\": \"integer\"\n        },\n        \"currentPage\": {\n          \"type\": \"integer\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\n#### Example Response\n\n- Status Code: 200\n    \n- {\"status\": true,\"message\": \"\",\"data\": { \"items\": \\[ { \"id\": 0, \"name\": \"\", \"description\": \"\", \"price\": \"\", \"createdAt\": \"\", \"updatedAt\": \"\", \"category\": { \"id\": 0, \"name\": \"\" } } \\], \"totalItems\": 0, \"totalPages\": 0, \"currentPage\": 0}}"
 							},
 							"response": []
+						},
+						{
+							"name": "Report",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/admin/report?startDate=&endDate=",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"admin",
+										"report"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": ""
+										},
+										{
+											"key": "endDate",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "example 1",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/report?startDate&endDate",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"report"
+											],
+											"query": [
+												{
+													"key": "startDate",
+													"value": null
+												},
+												{
+													"key": "endDate",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1058"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"422-Bt6VBvwNhcFWgWT+zJdo6ExOc0s\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 15 Dec 2024 21:15:07 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"The CSV file was written successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 3,\n                \"number\": 1003,\n                \"total\": \"35.97\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-07T13:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 3,\n                    \"username\": \"staff 2\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"number\": 1001,\n                \"total\": \"25.95\",\n                \"itemsQuantity\": \"5\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-01T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 1,\n                    \"username\": \"admin\"\n                }\n            },\n            {\n                \"id\": 4,\n                \"number\": 1004,\n                \"total\": \"23.95\",\n                \"itemsQuantity\": \"7\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-09T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 4,\n                    \"username\": \"admin1\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"number\": 1002,\n                \"total\": \"22.47\",\n                \"itemsQuantity\": \"6\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-05T11:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 6,\n                \"number\": 1006,\n                \"total\": \"22.47\",\n                \"itemsQuantity\": \"2\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-12T19:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 5,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"number\": 1005,\n                \"total\": \"18.49\",\n                \"itemsQuantity\": \"1\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-10T17:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 5,\n                    \"username\": \"staff 1\"\n                }\n            }\n        ],\n        \"total\": 6\n    }\n}"
+								},
+								{
+									"name": "example 2",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/report?startDate=2024-10-01&endDate=2024-11-01",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"report"
+											],
+											"query": [
+												{
+													"key": "startDate",
+													"value": "2024-10-01"
+												},
+												{
+													"key": "endDate",
+													"value": "2024-11-01"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "256"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"100-aoEuPqASysr6wgJhVV6xcJfjM3g\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 15 Dec 2024 21:18:23 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"The CSV file was written successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 7,\n                \"number\": 1007,\n                \"total\": \"15.47\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-10-13T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            }\n        ],\n        \"total\": 1\n    }\n}"
+								},
+								{
+									"name": "example 3",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/report?startDate=2024-10-01",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"report"
+											],
+											"query": [
+												{
+													"key": "startDate",
+													"value": "2024-10-01"
+												},
+												{
+													"key": "endDate",
+													"value": "2024-11-01",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1058"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"422-jS5FbHiPH/lTA+D7eCF5CKdMYyQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 15 Dec 2024 21:19:48 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"The CSV file was written successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 3,\n                \"number\": 1003,\n                \"total\": \"35.97\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-07T13:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 3,\n                    \"username\": \"staff 2\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"number\": 1001,\n                \"total\": \"25.95\",\n                \"itemsQuantity\": \"5\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-01T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 1,\n                    \"username\": \"admin\"\n                }\n            },\n            {\n                \"id\": 4,\n                \"number\": 1004,\n                \"total\": \"23.95\",\n                \"itemsQuantity\": \"7\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-09T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 4,\n                    \"username\": \"admin1\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"number\": 1002,\n                \"total\": \"22.47\",\n                \"itemsQuantity\": \"6\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-05T11:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"number\": 1005,\n                \"total\": \"18.49\",\n                \"itemsQuantity\": \"1\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-10T17:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 5,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 7,\n                \"number\": 1007,\n                \"total\": \"15.47\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-10-13T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            }\n        ],\n        \"total\": 6\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -3827,7 +4261,8 @@
 									"value": ""
 								}
 							]
-						}
+						},
+						"description": "### Add Order\n\nThis endpoint allows the client to update the order details for a specific order.\n\n#### Request\n\n- Method: PUT\n    \n- URL: {{baseUrl}}api/v1/order/add/:orderID\n    \n- { \"items\": \\[ { \"itemID\": 1, \"quantity\": 6 } \\]}\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"items\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"category\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"totalItems\": {\n          \"type\": \"integer\"\n        },\n        \"totalPages\": {\n          \"type\": \"integer\"\n        },\n        \"currentPage\": {\n          \"type\": \"integer\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\nThe response will have a status code of 200 upon successful execution."
 					},
 					"response": [
 						{
@@ -3990,7 +4425,8 @@
 									"value": "8"
 								}
 							]
-						}
+						},
+						"description": "### Update Order Items\n\nThis endpoint is used to update the items in a specific order.\n\n#### Request\n\n- Method: PUT\n    \n- URL: {{baseUrl}}api/v1/order/remove/:orderID\n    \n\n##### Request Body\n\n- Type: Raw\n    \n- { \"items\": \\[ { \"itemID\": 12, \"quantity\": 1 } \\]}\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"items\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"number\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"category\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"number\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"totalItems\": {\n          \"type\": \"number\"\n        },\n        \"totalPages\": {\n          \"type\": \"number\"\n        },\n        \"currentPage\": {\n          \"type\": \"number\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\n- Status Code: 200"
 					},
 					"response": [
 						{
@@ -4124,7 +4560,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"staff 1\",\r\n    \"email\"   : \"staff1@gmail.com\",\r\n    \"password\": \"123456e\"\r\n}",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"email\"   : \"\",\r\n    \"password\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4141,7 +4577,8 @@
 								"auth",
 								"register"
 							]
-						}
+						},
+						"description": "### Register User\n\nThe POST request is used to register a new user.\n\n#### Request Body\n\n- username (string, required): The username of the user.\n    \n- email (string, required): The email of the user.\n    \n- password (string, required): The password for the user account.\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"user\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"role\": {\n                            \"type\": \"string\"\n                        },\n                        \"userID\": {\n                            \"type\": \"integer\"\n                        },\n                        \"username\": {\n                            \"type\": \"string\"\n                        },\n                        \"email\": {\n                            \"type\": \"string\"\n                        },\n                        \"updatedAt\": {\n                            \"type\": \"string\"\n                        },\n                        \"createdAt\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                },\n                \"token\": {\n                    \"type\": \"string\"\n                }\n            }\n        }\n    }\n}\n\n ```\n\n#### Related Responses\n\n- The response from other endpoints of this API contains data with a similar structure, such as items with id, name, description, price, createdAt, updatedAt, and category details.\n    \n\n#### Status Code\n\n- 200: The request was successful."
 					},
 					"response": [
 						{
@@ -4703,7 +5140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\"   : \"staff1@gmail.com\",\r\n    \"password\": \"123456e\"\r\n}",
+							"raw": "{\r\n    \"email\"   : \"\",\r\n    \"password\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4720,7 +5157,8 @@
 								"auth",
 								"login"
 							]
-						}
+						},
+						"description": "### API Request Description\n\nThis endpoint allows users to authenticate and obtain a token for accessing protected resources. The request should be sent via an HTTP POST method to the `{{baseUrl}}api/v1/auth/login` endpoint, with the following payload in the raw request body:\n\n``` json\n{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}\n\n ```\n\n- `email`: The email address of the user.\n    \n- `password`: The password associated with the user's account.\n    \n\n### API Response\n\nThe response for this request will be a JSON object with the following schema:\n\n``` json\n{\n  \"status\": \"boolean\",\n  \"message\": \"string\",\n  \"data\": {\n    \"user\": {\n      \"userID\": \"integer\",\n      \"username\": \"string\",\n      \"email\": \"string\",\n      \"role\": \"string\",\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\"\n    },\n    \"token\": \"string\"\n  }\n}\n\n ```\n\n- `status`: A boolean indicating the success or failure of the request.\n    \n- `message`: A string containing any additional information or error messages.\n    \n- `data`: An object containing user information and an authentication token.\n    \n    - `user`: An object containing user details.\n        \n        - `userID`: An integer representing the user's ID.\n            \n        - `username`: A string representing the user's username.\n            \n        - `email`: A string representing the user's email address.\n            \n        - `role`: A string representing the user's role or permissions.\n            \n        - `createdAt`: A string representing the date and time of user creation.\n            \n        - `updatedAt`: A string representing the date and time of user's last update.\n            \n    - `token`: A string representing the authentication token.\n        \n\n### Related Responses\n\nCalls to other endpoints of this API may return data with similar data models, such as a list of items with their details and categories.\n\nExample Response:\n\n``` json\n{\n  \"status\": \"boolean\",\n  \"message\": \"string\",\n  \"data\": {\n    \"items\": [\n      {\n        \"id\": \"integer\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"price\": \"string\",\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string\",\n        \"category\": {\n          \"id\": \"integer\",\n          \"name\": \"string\"\n        }\n      }\n    ],\n    \"totalItems\": \"integer\",\n    \"totalPages\": \"integer\",\n    \"currentPage\": \"integer\"\n  }\n}\n\n ```\n\nThis response is accompanied by a 200 status code, indicating a successful request."
 					},
 					"response": [
 						{
@@ -5052,6 +5490,506 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": false,\n    \"message\": \"Email cannot be empty\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/v1/auth/forgot-password",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"forgot-password"
+							]
+						},
+						"description": "### POST /api/v1/auth/forgot-password\n\nThis endpoint is used to initiate the process of resetting a user's password by sending a reset link to the provided email address.\n\n#### Request Body\n\n- email (string, required): The email address for which the password reset link will be sent.\n    \n\n#### Response\n\nThe response for this request is a JSON object with the following properties:\n\n- status (boolean): Indicates the status of the request. In this case, it will be true if the request was successful.\n    \n- message (string): A message related to the request, if any.\n    \n- data (null): The data property is null in this case.\n    \n\n#### Example Response\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": null\n}\n\n ```\n\n#### JSON Schema for Response\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"null\"\n    }\n  },\n  \"required\": [\"status\", \"message\", \"data\"]\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "example 1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin19@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/auth/forgot-password",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-kOFF6Pot/rVZYHt3BuwvfKEIhF0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2024 17:53:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Invalid email address\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "example 2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"rewanmahrous0@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/auth/forgot-password",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-S5H55dZMTDcXFUZzQBSeuUzf9Ug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2024 17:59:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"verification code is sent, check your inbox\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "verify and reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"code\": 111111,\r\n    \"newPassword\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/v1/auth/reset-password",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						},
+						"description": "### Reset Password\n\nThis endpoint allows the user to reset their password by providing their email, verification code, and new password.\n\n#### Request Body\n\n- `email` (string, required): The email address of the user.\n    \n- `code` (number, required): The verification code sent to the user's email.\n    \n- `newPassword` (string, required): The new password for the user's account.\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"token\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\nThe response will contain the following fields:\n\n- `status` (boolean): Indicates the status of the request.\n    \n- `message` (string): A message related to the request status.\n    \n- `data.token` (string): A token for further authentication or authorization.\n    \n\n#### Example Response\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"token\": \"\"\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "example 1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"rewanmahrous0@gmail.com\",\r\n    \"code\": 8010021,\r\n    \"newPassword\": \"1234567r\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/auth/reset-password",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-Oh42gsnAhWXPsVZltFLLwFe8w1M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2024 18:12:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Invalid Verification code.\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "example 2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"rewanmahrous0@gmail.com\",\r\n    \"code\": 801002,\r\n    \"newPassword\": \"1234567r\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/auth/reset-password",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "212"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d4-U6Daq/8tm4c+gJYoEMqrn8A2yrU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2024 18:14:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Password reset successfully\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0Mjg2NDQyLCJleHAiOjE3MzQ4OTEyNDJ9.9AZtciyjpBsiBuUth1RhKrApebjLZjeo1saU8gMw64s\"\n    }\n}"
 						}
 					]
 				}
@@ -6066,6 +7004,38 @@
 					]
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/",
+			"type": "default"
 		}
 	]
 }
