@@ -123,10 +123,11 @@ The API is documented using **Postman**. You can view the documentation interact
 
 #### Menu Management
 1. **Get Top 10 selling items last 30 days**:
+    it 
    ```http
-  GET /api/v1/menu/top-selling
+   GET /api/v1/menu/top-selling
    ```
-   - Response:
+    - Response:
      ```json
       {
         "success": true,
