@@ -13,7 +13,7 @@ const authRoute = require('./routes/auth.route');
 const orderRoute = require('./routes/order.route');
 const staffRoute = require('./routes/staff.route');
 
-const whitelist = ['http://localhost:8080', 'https://restaurant-app-backend.herokuapp.com'];
+const whitelist = [`http://localhost:${process.env.PORT}`, 'https://restaurant-app-backend.herokuapp.com'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!whitelist.includes(origin) !== -1 || !origin) {
@@ -62,4 +62,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
     console.log(`Server listening on port ${port}`);
 });
+
 module.exports = app;

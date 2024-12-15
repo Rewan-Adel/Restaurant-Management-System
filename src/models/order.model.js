@@ -37,7 +37,7 @@ class Order extends Model{
                 allowNull: false
             },
             status:{
-                type: DataTypes.ENUM('pending','delivered', 'completed','cancelled' ,'expired'),
+                type: DataTypes.ENUM('pending', 'completed','cancelled' ,'expired'),
                 allowNull: false,
                 defaultValue: 'pending'
             },

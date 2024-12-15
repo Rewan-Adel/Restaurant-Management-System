@@ -1,5 +1,5 @@
+
 module.exports = {
     secret: process.env.TOKEN_SECRET,
-    expiresIn: '7d',
-    algorithm: 'HS256'
+    expiresIn: process.env.JWT_EXPIRATION
 }

@@ -11,7 +11,7 @@ exports.isAuthenticated   = async(req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return failedResponse(res, 'Authorization token is missing or invalid.', 401);
+        return failedResponse(res, 'Authorization token is missing or invalid.', null,401);
     }
     const token = authHeader.split(' ')[1];
     if (!token)
