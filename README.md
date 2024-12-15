@@ -90,17 +90,16 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
    - Create a `.env` file in the root directory.
    - Add the following variables:
      ```env
-     NODE_ENV=development
-     PORT=3000
-     DB_HOST=localhost
-     DB_USER=your_db_user
-     DB_PASS=your_db_password
-     DB_NAME=restaurant_db
-     TOKEN_SECRET=your_secret_key
-     JWT_EXPIRATION=7d
-     EMAIL_SENDER  = your_gmail_acc 
-    EMAIL_PASSWORD = gmail_app_password
-
+     NODE_ENV       = development
+     PORT           = 3000
+     DB_HOST        = localhost
+     DB_USER        = your_db_user
+     DB_PASS        = your_db_password
+     DB_NAME        = restaurant_db
+     EMAIL_SENDER   = your_gmail_acc 
+     EMAIL_PASSWORD = gmail_app_password
+     TOKEN_SECRET   = your_secret_key
+     JWT_EXPIRATION = 7d
      ```
 
 4. Start the Server:
