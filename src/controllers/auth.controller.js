@@ -104,8 +104,6 @@ exports.verifyAndResetPass = async (req, res) => {
     if(user.passResetToken === null){
         return failedResponse(res, 'You have already reset your password');
     };
-    console.log(user.passResetToken);
-    console.log(code);
 
     if ( !await bcrypt.compare(code.toString(), user.passResetToken))
         return failedResponse(res, 'Invalid Verification code.');
