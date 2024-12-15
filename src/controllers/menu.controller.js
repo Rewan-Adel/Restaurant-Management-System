@@ -50,7 +50,7 @@ exports.getAllItems = async (req, res) => {
         });
         return successResponse(res, "Items retrieved successfully", {
             items: items.rows,
-            totalItems: items.count,
+            total: items.count,
             totalPages: Math.ceil(items.count / limit),
             currentPage: page
         });
