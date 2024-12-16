@@ -145,7 +145,7 @@ The API is documented using **Postman**. You can view the documentation interact
               "name": "Veggie Delight",
               "price": 9.99,
               "totalSold": 120
-            }
+            },{...},{...},...
           ]
         }
 
