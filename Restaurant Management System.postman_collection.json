@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "13ac185b-0dc2-4667-aa3d-1c05407edd09",
+		"_postman_id": "10a07f45-b8c2-4747-a730-e2ab2106bab1",
 		"name": "Restaurant Management System",
 		"description": "🍔Restaurant Management System API Documentation\n\nSimplified Restaurant Management System API that supports\n\n- menu management.\n    \n- order management.\n    \n- user authentication.\n    \n\n### Authentication\n\nThe API supports authentication using **JWT (JSON Web Tokens)** via the `Authorization` header. Use this method to access protected endpoints.\n\n#### 1\\. JWT in Authorization Header\n\nInclude a valid JWT token in the `Authorization` header for endpoints that require authentication. This method ensures secure access for both mobile and browser clients.\n\n**Example:**\n\n``` json\nAuthorization: Bearer <your_token_here>\n\n ```\n\n---\n\n### Response Format\n\nAll responses follow this structure:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"Optional descriptive message\",\n  \"data\": { ... }\n}\n\n ```\n\n### Error Handling\n\nErrors are returned in the following format:\n\n``` json\n{\n  \"status\": false,\n  \"message\": \"Error description\",\n  \"data\": null\n}\n\n ```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25350743",
-		"_collection_link": "https://notnull-7187.postman.co/workspace/APIs~968c0b9f-5836-49f0-b72c-fef34b3c3df7/collection/25350743-13ac185b-0dc2-4667-aa3d-1c05407edd09?action=share&source=collection_link&creator=25350743"
+		"_collection_link": "https://notnull-7187.postman.co/workspace/Restaurant-Documentation~fe4c91e9-282f-4c73-946a-a609db469244/collection/25350743-10a07f45-b8c2-4747-a730-e2ab2106bab1?action=share&source=collection_link&creator=25350743"
 	},
 	"item": [
 		{
@@ -1130,6 +1130,9 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
+								"url": {
+									"raw": ""
+								},
 								"description": "\n### DELETE Request\n\nThis endpoint is used to delete a resource.\n\n#### Request Body\nThis request does not require a request body.\n\n#### Response\nThe response for this request is a JSON object with the following schema:\n\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"null\"\n    }\n  }\n}\n```\n"
 							},
 							"response": [
@@ -2376,6 +2379,107 @@
 											]
 										}
 									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "95"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"5f-mQx1NumexVfNNnRjMpK8kxEZQoM\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 16 Dec 2024 07:52:46 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"You do not have the permissions. Only staff can access.\",\n    \"data\": 403\n}"
+								},
+								{
+									"name": "example 2",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/all",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"all"
+											]
+										}
+									},
 									"status": "OK",
 									"code": 200,
 									"_postman_previewlanguage": "json",
@@ -2438,15 +2542,15 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "1200"
+											"value": "856"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"4b0-fo92K3LYBGnB5lUi/fKTC/CXNNk\""
+											"value": "W/\"358-mpDCIvsVqmFG4+T+ln3Xh7nTVQI\""
 										},
 										{
 											"key": "Date",
-											"value": "Sat, 14 Dec 2024 14:58:41 GMT"
+											"value": "Mon, 16 Dec 2024 07:54:08 GMT"
 										},
 										{
 											"key": "Connection",
@@ -2458,7 +2562,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"status\": true,\n    \"message\": \"Orders retrieved successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 1,\n                \"total\": \"44.91\",\n                \"status\": \"expired\",\n                \"number\": 610896,\n                \"createdAt\": \"2024-12-14T14:53:40.000Z\",\n                \"updatedAt\": \"2024-12-14T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": []\n            },\n            {\n                \"id\": 2,\n                \"total\": \"44.91\",\n                \"status\": \"expired\",\n                \"number\": 447573,\n                \"createdAt\": \"2024-12-14T14:54:47.000Z\",\n                \"updatedAt\": \"2024-12-14T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": []\n            },\n            {\n                \"id\": 3,\n                \"total\": \"44.91\",\n                \"status\": \"expired\",\n                \"number\": 346966,\n                \"createdAt\": \"2024-12-14T14:55:52.000Z\",\n                \"updatedAt\": \"2024-12-14T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": []\n            },\n            {\n                \"id\": 4,\n                \"total\": \"44.91\",\n                \"status\": \"pending\",\n                \"number\": 337678,\n                \"createdAt\": \"2024-12-14T14:56:42.000Z\",\n                \"updatedAt\": \"2024-12-14T14:56:42.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 10,\n                        \"name\": \"Americano\",\n                        \"price\": \"3.99\",\n                        \"order_items\": {\n                            \"price\": \"143.64\",\n                            \"quantity\": 6\n                        }\n                    },\n                    {\n                        \"id\": 12,\n                        \"name\": \"Orange Juice\",\n                        \"price\": \"4.99\",\n                        \"order_items\": {\n                            \"price\": \"19.96\",\n                            \"quantity\": 2\n                        }\n                    },\n                    {\n                        \"id\": 18,\n                        \"name\": \"Chicken Caesar Salad\",\n                        \"price\": \"10.99\",\n                        \"order_items\": {\n                            \"price\": \"10.99\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": 5,\n                \"total\": \"28.95\",\n                \"status\": \"completed\",\n                \"number\": 347182,\n                \"createdAt\": \"2024-12-14T14:57:06.000Z\",\n                \"updatedAt\": \"2024-12-14T14:57:58.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 11,\n                        \"name\": \"Latte\",\n                        \"price\": \"4.49\",\n                        \"order_items\": {\n                            \"price\": \"71.84\",\n                            \"quantity\": 4\n                        }\n                    },\n                    {\n                        \"id\": 5,\n                        \"name\": \"Veggie Pizza\",\n                        \"price\": \"10.99\",\n                        \"order_items\": {\n                            \"price\": \"10.99\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": 6,\n                \"total\": \"10.99\",\n                \"status\": \"pending\",\n                \"number\": 120159,\n                \"createdAt\": \"2024-12-14T14:57:18.000Z\",\n                \"updatedAt\": \"2024-12-14T14:57:18.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 5,\n                        \"name\": \"Veggie Pizza\",\n                        \"price\": \"10.99\",\n                        \"order_items\": {\n                            \"price\": \"10.99\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": 7,\n                \"total\": \"10.99\",\n                \"status\": \"pending\",\n                \"number\": 733484,\n                \"createdAt\": \"2024-12-14T15:04:58.000Z\",\n                \"updatedAt\": \"2024-12-14T15:04:58.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 5,\n                        \"name\": \"Veggie Pizza\",\n                        \"price\": \"10.99\",\n                        \"order_items\": {\n                            \"price\": \"10.99\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            }\n        ],\n        \"total\": 10,\n        \"currentPage\": 1,\n        \"totalPages\": 1\n    }\n}"
+									"body": "{\n    \"status\": true,\n    \"message\": \"Orders retrieved successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 2,\n                \"total\": \"22.47\",\n                \"status\": \"completed\",\n                \"number\": 1002,\n                \"createdAt\": \"2024-12-05T11:00:00.000Z\",\n                \"updatedAt\": \"2024-12-15T22:14:01.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Classic Burger\",\n                        \"price\": \"8.99\",\n                        \"order_items\": {\n                            \"price\": \"4.99\",\n                            \"quantity\": 2\n                        }\n                    },\n                    {\n                        \"id\": 4,\n                        \"name\": \"Pepperoni Pizza\",\n                        \"price\": \"12.99\",\n                        \"order_items\": {\n                            \"price\": \"9.49\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": 7,\n                \"total\": \"15.47\",\n                \"status\": \"completed\",\n                \"number\": 1007,\n                \"createdAt\": \"2024-10-13T09:00:00.000Z\",\n                \"updatedAt\": \"2024-10-13T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                },\n                \"items\": [\n                    {\n                        \"id\": 10,\n                        \"name\": \"Americano\",\n                        \"price\": \"3.99\",\n                        \"order_items\": {\n                            \"price\": \"3.99\",\n                            \"quantity\": 3\n                        }\n                    },\n                    {\n                        \"id\": 11,\n                        \"name\": \"Latte\",\n                        \"price\": \"4.49\",\n                        \"order_items\": {\n                            \"price\": \"4.49\",\n                            \"quantity\": 1\n                        }\n                    }\n                ]\n            }\n        ],\n        \"total\": 5,\n        \"currentPage\": 1,\n        \"totalPages\": 1\n    }\n}"
 								}
 							]
 						},
@@ -3550,310 +3654,6 @@
 							]
 						},
 						{
-							"name": "Delete Order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM0MTcwMDIzLCJleHAiOjE3MzQ3NzQ4MjN9.Eqrptp3kJ8TC620VGUpyaOGrP_pZm_M4cB1RiVGD6kE",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
-									"host": [
-										"{{baseUrl}}api"
-									],
-									"path": [
-										"v1",
-										"order",
-										"admin",
-										"delete",
-										":orderID"
-									],
-									"variable": [
-										{
-											"key": "orderID",
-											"value": ""
-										}
-									]
-								},
-								"description": "### Delete Order by ID\n\nThis endpoint is used to delete a specific order by its ID.\n\n#### Response\n\nThe response for this request will be a JSON object with the following properties:\n\n- `status` (boolean): Indicates the success or failure of the request.\n    \n- `message` (string): Provides additional information about the request status.\n    \n- `data` (object): Contains the response data which may include the following properties:\n    \n    - `items` (array): An array of items associated with the order, each containing the following properties:\n        \n        - `id` (number): The ID of the item.\n            \n        - `name` (string): The name of the item.\n            \n        - `description` (string): The description of the item.\n            \n        - `price` (string): The price of the item.\n            \n        - `createdAt` (string): The date and time when the item was created.\n            \n        - `updatedAt` (string): The date and time when the item was last updated.\n            \n        - `category` (object): An object representing the category of the item, containing the following properties:\n            \n            - `id` (number): The ID of the category.\n                \n            - `name` (string): The name of the category.\n                \n    - `totalItems` (number): The total number of items associated with the order.\n        \n    - `totalPages` (number): The total number of pages for the items.\n        \n    - `currentPage` (number): The current page number.\n        \n\n#### Example\n\n``` json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"data\": null\n}\n\n ```"
-							},
-							"response": [
-								{
-									"name": "example 1",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
-											"host": [
-												"{{baseUrl}}api"
-											],
-											"path": [
-												"v1",
-												"order",
-												"admin",
-												"delete",
-												":orderID"
-											],
-											"variable": [
-												{
-													"key": "orderID",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Security-Policy",
-											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
-										},
-										{
-											"key": "Cross-Origin-Opener-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Cross-Origin-Resource-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Origin-Agent-Cluster",
-											"value": "?1"
-										},
-										{
-											"key": "Referrer-Policy",
-											"value": "no-referrer"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=31536000; includeSubDomains"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "X-DNS-Prefetch-Control",
-											"value": "off"
-										},
-										{
-											"key": "X-Download-Options",
-											"value": "noopen"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Permitted-Cross-Domain-Policies",
-											"value": "none"
-										},
-										{
-											"key": "X-XSS-Protection",
-											"value": "0"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "66"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"42-Qd5XEeh6JrF6TnqzFiiLPImYwYs\""
-										},
-										{
-											"key": "Date",
-											"value": "Sat, 14 Dec 2024 14:36:27 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"status\": true,\n    \"message\": \"Order deleted successfully\",\n    \"data\": null\n}"
-								},
-								{
-									"name": "example 2",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
-											"host": [
-												"{{baseUrl}}api"
-											],
-											"path": [
-												"v1",
-												"order",
-												"admin",
-												"delete",
-												":orderID"
-											],
-											"variable": [
-												{
-													"key": "orderID",
-													"value": "4"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Security-Policy",
-											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
-										},
-										{
-											"key": "Cross-Origin-Opener-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Cross-Origin-Resource-Policy",
-											"value": "same-origin"
-										},
-										{
-											"key": "Origin-Agent-Cluster",
-											"value": "?1"
-										},
-										{
-											"key": "Referrer-Policy",
-											"value": "no-referrer"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=31536000; includeSubDomains"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "X-DNS-Prefetch-Control",
-											"value": "off"
-										},
-										{
-											"key": "X-Download-Options",
-											"value": "noopen"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Permitted-Cross-Domain-Policies",
-											"value": "none"
-										},
-										{
-											"key": "X-XSS-Protection",
-											"value": "0"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "56"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"38-D6kLX8I1MW3r8q0P/UEJCX5tkJg\""
-										},
-										{
-											"key": "Date",
-											"value": "Sat, 14 Dec 2024 14:36:01 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
-								}
-							]
-						},
-						{
-							"name": "Update Order Status",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM0MTg2OTQ5LCJleHAiOjE3MzQ3OTE3NDl9.NqewLJD4rlaVH6VgOh78GBDkdky2KNJgFeQUDbBVuSw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"status\": \"\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}api/v1/order/admin/mark/:orderID",
-									"host": [
-										"{{baseUrl}}api"
-									],
-									"path": [
-										"v1",
-										"order",
-										"admin",
-										"mark",
-										":orderID"
-									],
-									"variable": [
-										{
-											"key": "orderID",
-											"value": ""
-										}
-									]
-								},
-								"description": "### Update Order Status\n\nThis endpoint allows the admin to update the status of a specific order.\n\n#### Request\n\n- Method: PUT\n    \n- URL: `{{baseUrl}}api/v1/order/admin/mark/:orderID`\n    \n\n##### Request Body\n\n- Type: JSON\n    \n    - `status` (string, required): The updated status of the order.\n        \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"items\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"category\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"totalItems\": {\n          \"type\": \"integer\"\n        },\n        \"totalPages\": {\n          \"type\": \"integer\"\n        },\n        \"currentPage\": {\n          \"type\": \"integer\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\n#### Example Response\n\n- Status Code: 200\n    \n- {\"status\": true,\"message\": \"\",\"data\": { \"items\": \\[ { \"id\": 0, \"name\": \"\", \"description\": \"\", \"price\": \"\", \"createdAt\": \"\", \"updatedAt\": \"\", \"category\": { \"id\": 0, \"name\": \"\" } } \\], \"totalItems\": 0, \"totalPages\": 0, \"currentPage\": 0}}"
-							},
-							"response": []
-						},
-						{
 							"name": "Report",
 							"request": {
 								"method": "GET",
@@ -4215,6 +4015,678 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"status\": true,\n    \"message\": \"The CSV file was written successfully\",\n    \"data\": {\n        \"orders\": [\n            {\n                \"id\": 3,\n                \"number\": 1003,\n                \"total\": \"35.97\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-07T13:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 3,\n                    \"username\": \"staff 2\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"number\": 1001,\n                \"total\": \"25.95\",\n                \"itemsQuantity\": \"5\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-01T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 1,\n                    \"username\": \"admin\"\n                }\n            },\n            {\n                \"id\": 4,\n                \"number\": 1004,\n                \"total\": \"23.95\",\n                \"itemsQuantity\": \"7\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-09T15:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 4,\n                    \"username\": \"admin1\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"number\": 1002,\n                \"total\": \"22.47\",\n                \"itemsQuantity\": \"6\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-05T11:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"number\": 1005,\n                \"total\": \"18.49\",\n                \"itemsQuantity\": \"1\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-12-10T17:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 5,\n                    \"username\": \"staff 1\"\n                }\n            },\n            {\n                \"id\": 7,\n                \"number\": 1007,\n                \"total\": \"15.47\",\n                \"itemsQuantity\": \"4\",\n                \"status\": \"completed\",\n                \"createdAt\": \"2024-10-13T09:00:00.000Z\",\n                \"orderedBy\": {\n                    \"id\": 2,\n                    \"username\": \"staff 1\"\n                }\n            }\n        ],\n        \"total\": 6\n    }\n}"
+								},
+								{
+									"name": "example 4",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/report?startDate=&endDate=",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"report"
+											],
+											"query": [
+												{
+													"key": "startDate",
+													"value": ""
+												},
+												{
+													"key": "endDate",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "95"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"5f-FnCMrVhNosX6dp8Yg25LVXUEVQg\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 16 Dec 2024 08:06:48 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"You do not have the permissions.Only admin can access.\",\n    \"data\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM0MTcwMDIzLCJleHAiOjE3MzQ3NzQ4MjN9.Eqrptp3kJ8TC620VGUpyaOGrP_pZm_M4cB1RiVGD6kE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"admin",
+										"delete",
+										":orderID"
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": ""
+										}
+									]
+								},
+								"description": "### Delete Order by ID\n\nThis endpoint is used to delete a specific order by its ID.\n\n#### Response\n\nThe response for this request will be a JSON object with the following properties:\n\n- `status` (boolean): Indicates the success or failure of the request.\n    \n- `message` (string): Provides additional information about the request status.\n    \n- `data` (object): Contains the response data which may include the following properties:\n    \n    - `items` (array): An array of items associated with the order, each containing the following properties:\n        \n        - `id` (number): The ID of the item.\n            \n        - `name` (string): The name of the item.\n            \n        - `description` (string): The description of the item.\n            \n        - `price` (string): The price of the item.\n            \n        - `createdAt` (string): The date and time when the item was created.\n            \n        - `updatedAt` (string): The date and time when the item was last updated.\n            \n        - `category` (object): An object representing the category of the item, containing the following properties:\n            \n            - `id` (number): The ID of the category.\n                \n            - `name` (string): The name of the category.\n                \n    - `totalItems` (number): The total number of items associated with the order.\n        \n    - `totalPages` (number): The total number of pages for the items.\n        \n    - `currentPage` (number): The current page number.\n        \n\n#### Example\n\n``` json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"data\": null\n}\n\n ```"
+							},
+							"response": [
+								{
+									"name": "example 1",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"delete",
+												":orderID"
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "66"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"42-Qd5XEeh6JrF6TnqzFiiLPImYwYs\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 14 Dec 2024 14:36:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Order deleted successfully\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "example 2",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/delete/:orderID",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"delete",
+												":orderID"
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "4"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "56"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"38-D6kLX8I1MW3r8q0P/UEJCX5tkJg\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 14 Dec 2024 14:36:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Order Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTIxNjA1LCJleHAiOjE3MzQ3MjY0MDV9._JAJBBBGzBMwbctjs0YBEJMy4zn3Im0WzmTGXNeXbKU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/admin/mark/:orderID?status",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"admin",
+										"mark",
+										":orderID"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": null
+										}
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": ""
+										}
+									]
+								},
+								"description": "### Update Order Status\n\nThis endpoint allows the admin to update the status of a specific order.\n\n#### Request\n\n- Method: PUT\n    \n- URL: `{{baseUrl}}api/v1/order/admin/mark/:orderID`\n    \n\n##### Request Body\n\n- Type: JSON\n    \n    - `status` (string, required): The updated status of the order.\n        \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"items\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"description\": {\n                \"type\": \"string\"\n              },\n              \"price\": {\n                \"type\": \"string\"\n              },\n              \"createdAt\": {\n                \"type\": \"string\"\n              },\n              \"updatedAt\": {\n                \"type\": \"string\"\n              },\n              \"category\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"totalItems\": {\n          \"type\": \"integer\"\n        },\n        \"totalPages\": {\n          \"type\": \"integer\"\n        },\n        \"currentPage\": {\n          \"type\": \"integer\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\n#### Example Response\n\n- Status Code: 200\n    \n- {\"status\": true,\"message\": \"\",\"data\": { \"items\": \\[ { \"id\": 0, \"name\": \"\", \"description\": \"\", \"price\": \"\", \"createdAt\": \"\", \"updatedAt\": \"\", \"category\": { \"id\": 0, \"name\": \"\" } } \\], \"totalItems\": 0, \"totalPages\": 0, \"currentPage\": 0}}"
+							},
+							"response": [
+								{
+									"name": "example 1",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/mark/:orderID?status=cancelled",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"mark",
+												":orderID"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "cancelled"
+												}
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "219"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"db-zC9icUAT5rrAXjSctQ+9vlzpmn8\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 16 Dec 2024 07:58:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Order marked successfully\",\n    \"data\": {\n        \"order\": {\n            \"id\": 7,\n            \"userID\": 2,\n            \"total\": \"15.47\",\n            \"status\": \"cancelled\",\n            \"number\": 1007,\n            \"createdAt\": \"2024-10-13T09:00:00.000Z\",\n            \"updatedAt\": \"2024-12-16T07:58:26.000Z\"\n        }\n    }\n}"
+								},
+								{
+									"name": "example 2",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}api/v1/order/admin/mark/:orderID",
+											"host": [
+												"{{baseUrl}}api"
+											],
+											"path": [
+												"v1",
+												"order",
+												"admin",
+												"mark",
+												":orderID"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "cancelled",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "orderID",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=31536000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "219"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"db-hglU4v71Y/sT0e1j3pfBEGHMtRM\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 16 Dec 2024 08:05:37 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Invalid status. Status can only be pending, completed or cancelled\",\n    \"data\": null\n}"
 								}
 							]
 						}
@@ -4266,7 +4738,7 @@
 					},
 					"response": [
 						{
-							"name": "400 status code",
+							"name": "example 1",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [],
@@ -4381,6 +4853,123 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": false,\n    \"message\": \"Order is completed. Can't add more items.\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "example 2",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"items\":[\r\n    {\r\n        \"itemID\":1,\r\n        \"quantity\": 6\r\n    },\r\n    {\r\n        \"itemID\":6,\r\n        \"quantity\": 1\r\n    }\r\n   ] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/add/:orderID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"add",
+										":orderID"
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c-Nl6nfEkbrwTsYGOwXHfRGGxdd7o\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Dec 2024 08:40:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Order is cancelled. Can't add or remove more items.\",\n    \"data\": null\n}"
 						}
 					]
 				},
@@ -4545,6 +5134,357 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": false,\n    \"message\": \"Order not found\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "example 2",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"items\":[\r\n    {\r\n        \"itemID\":4,\r\n        \"quantity\":2\r\n    },{\r\n        \"itemID\":1,\r\n        \"quantity\":1\r\n    },{\r\n        \"itemID\": 6,\r\n        \"quantity\":1\r\n    }\r\n   ] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/remove/:orderID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"remove",
+										":orderID"
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "517"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"205-3xUG2SW/QZ7EwSksPP27axomB9A\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Dec 2024 08:36:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Items removed from order successfully\",\n    \"data\": {\n        \"order\": {\n            \"id\": 1,\n            \"userID\": 1,\n            \"total\": \"37.96\",\n            \"status\": \"completed\",\n            \"number\": 1001,\n            \"createdAt\": \"2024-12-01T09:00:00.000Z\",\n            \"updatedAt\": \"2024-12-16T08:36:15.000Z\",\n            \"items\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Classic Burger\",\n                    \"price\": \"8.99\",\n                    \"order_items\": {\n                        \"price\": \"0.00\",\n                        \"quantity\": 1\n                    }\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Hot Burger\",\n                    \"price\": \"9.99\",\n                    \"order_items\": {\n                        \"price\": \"9.90\",\n                        \"quantity\": 1\n                    }\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Pepperoni Pizza\",\n                    \"price\": \"12.99\",\n                    \"order_items\": {\n                        \"price\": \"402.69\",\n                        \"quantity\": 3\n                    }\n                }\n            ]\n        }\n    }\n}"
+						},
+						{
+							"name": "example 3",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"items\":[\r\n    {\r\n        \"itemID\":4,\r\n        \"quantity\":2\r\n    },{\r\n        \"itemID\":1,\r\n        \"quantity\":1\r\n    },{\r\n        \"itemID\": 6,\r\n        \"quantity\":1\r\n    }\r\n   ] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/remove/:orderID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"remove",
+										":orderID"
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c-iXs4aBqckrb7jNoGuHOeDoYD9tw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Dec 2024 08:37:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Order is completed. Can't add or remove more items.\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "example 4",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"items\":[\r\n    {\r\n        \"itemID\":4,\r\n        \"quantity\":2\r\n    },{\r\n        \"itemID\":1,\r\n        \"quantity\":1\r\n    },{\r\n        \"itemID\": 6,\r\n        \"quantity\":1\r\n    }\r\n   ] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/order/remove/:orderID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"order",
+										"remove",
+										":orderID"
+									],
+									"variable": [
+										{
+											"key": "orderID",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c-Nl6nfEkbrwTsYGOwXHfRGGxdd7o\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Dec 2024 08:39:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Order is cancelled. Can't add or remove more items.\",\n    \"data\": null\n}"
 						}
 					]
 				}
@@ -5990,6 +6930,116 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": true,\n    \"message\": \"Password reset successfully\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0Mjg2NDQyLCJleHAiOjE3MzQ4OTEyNDJ9.9AZtciyjpBsiBuUth1RhKrApebjLZjeo1saU8gMw64s\"\n    }\n}"
+						},
+						{
+							"name": "example 3",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"rewanmahrou0@gmail.com\",\r\n    \"code\": 162130,\r\n    \"newPassword\": \"1234567r\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/v1/auth/reset-password",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-kOFF6Pot/rVZYHt3BuwvfKEIhF0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Dec 2024 08:16:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Invalid email address\",\n    \"data\": null\n}"
 						}
 					]
 				}

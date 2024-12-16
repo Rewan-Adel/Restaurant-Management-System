@@ -227,7 +227,7 @@ The API is documented using **Postman**. You can view the documentation interact
 2. **Mark Order as Complete**:
 
    ```http
-   PUT /api/v1/orders/:orderID/complete
+   PUT /api/v1/order/complete/:orderID
    ```
   - Response:
      ```json
@@ -267,7 +267,7 @@ The API is documented using **Postman**. You can view the documentation interact
 3. **Get All Orders for staff member**:
     - this endpoint get all orders that ordered by authenticated staff member 
    ```http
-   PUT /api/v1/orders
+   PUT /api/v1/order/all
    ```
   - Response:
      ```json
@@ -307,9 +307,9 @@ The API is documented using **Postman**. You can view the documentation interact
      ```
 
 4. **Get All Orders for admins**:
-    - this endpoint get all orders in database by authenticated admin 
+    - this endpoint get all orders in database by authenticated admin. with filtering by status `optional` 
    ```http
-   PUT /api/v1/orders/admin
+   PUT /api/v1/order/admin/all?status=
    ```
   - Response:
      ```json
@@ -347,6 +347,10 @@ The API is documented using **Postman**. You can view the documentation interact
       }
      }
      ```
+
+## Forgot Password Api
+- When a user forgets their password, an email is sent:
+[!forgotPass](./images//Screenshot%202023-11-11%20202343.png)
 
 
 ## Testing
