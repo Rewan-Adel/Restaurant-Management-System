@@ -97,10 +97,11 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
      DB_USER        = your_db_user
      DB_PASS        = your_db_password
      DB_NAME        = restaurant_db
-     EMAIL_SENDER   = your_gmail_acc 
-     EMAIL_PASSWORD = gmail_app_password
+
      TOKEN_SECRET   = your_secret_key
      JWT_EXPIRATION = 7d
+     EMAIL_SENDER   = rewanadel1266@gmail.com  
+     EMAIL_PASSWORD = qccn pnhg skyj esdm
      ```
 
 4. Start the Server:
