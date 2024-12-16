@@ -46,9 +46,7 @@ exports.login = async(req, res) =>{
     if (error) return failedResponse(res, error.details[0].message);
     try {
         const user = await User.findOne({ where: { email: value.email } });
-        console.log(user.password);
-        console.log(await bcrypt.compare(value.password, user.password))
-        
+            
         if(!user || !await bcrypt.compare(value.password, user.password))
             return failedResponse(res, "Invalid email or password");
         const token = generateToken(user);
