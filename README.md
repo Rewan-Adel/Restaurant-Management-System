@@ -12,6 +12,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 
 - Admins can:
   - Perform CRUD operations on menu items (name, description, price, category).
+  - create new item with rate limiting 100 request. 
 
 ### 2. Order Management
 
