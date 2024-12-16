@@ -63,9 +63,9 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 ![db](./images/diagram.png)
 
 ## Setup and Installation
+### Before run the server, run db.sql from the repository in MySQL.
 
 ### Prerequisites
-
 1. Node.js (>= 14.x)
 2. NPM 
 3. MySQL database
