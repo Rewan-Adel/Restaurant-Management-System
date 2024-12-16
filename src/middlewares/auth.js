@@ -15,7 +15,7 @@ exports.isAuthenticated   = async(req, res, next) => {
     }
     const token = authHeader.split(' ')[1];
     if (!token)
-        return failedResponse(res, 'Please, login to get access.', 401);
+        return failedResponse(res, 'Please, login to get access.',null, 401);
 
     try{
         const decoded = JWT.verify(token, process.env.TOKEN_SECRET);        
@@ -25,17 +25,17 @@ exports.isAuthenticated   = async(req, res, next) => {
         }
         
         if(user.passResetToken !== null){
-            return failedResponse(res, 'Please, reset your password.', 401);
+            return failedResponse(res, 'Please, reset your password.', null, 401);
         }
         else if(user.passResetExpire && user.passResetExpire < Date.now()){
-            return failedResponse(res, 'Password reset token expired.', 401);
+            return failedResponse(res, 'Password reset token expired.', null, 401);
         };
         req.user = user;
         next();
     }
     catch(error){
         console.log(error);
-        return failedResponse(res, 'Please, login to get access.', 401);
+        return failedResponse(res, 'Please, login to get access.', null, 401);
     }
 };
 /**
@@ -55,7 +55,7 @@ exports.isAdmin = async(req, res, next) => {
     }
     catch(error){
         console.log(error);
-        return failedResponse(res, 'Unauthorized', 401);
+        return failedResponse(res, 'Unauthorized',null, 401);
 }};
 
 exports.isStaff = async(req, res, next) => {
@@ -69,5 +69,5 @@ exports.isStaff = async(req, res, next) => {
     }
     catch(error){
         console.log(error);
-        return failedResponse(res, 'Unauthorized', 401);
+        return failedResponse(res, 'Unauthorized', null,401);
 }}
