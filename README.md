@@ -63,9 +63,9 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 ![db](./images/diagram.png)
 
 ## Setup and Installation
+### Before run the server, run db.sql from the repository in MySQL.
 
 ### Prerequisites
-
 1. Node.js (>= 14.x)
 2. NPM 
 3. MySQL database
@@ -92,14 +92,15 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
    - Add the following variables:
      ```env
      NODE_ENV       = development
-     PORT           = 3000
+     PORT           = 8080
      DB_HOST        = localhost
      DB_USER        = your_db_user
      DB_PASS        = your_db_password
-     DB_NAME        = restaurant_db
+     DB_NAME        = restaurant
 
      TOKEN_SECRET   = your_secret_key
      JWT_EXPIRATION = 7d
+     
      EMAIL_SENDER   = rewanadel1266@gmail.com  
      EMAIL_PASSWORD = qccn pnhg skyj esdm
      ```
@@ -110,7 +111,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
    npm start
    ```
 
-   The server will run on `http://localhost:3000` by default.
+   The server will run on `http://localhost:8080` by default.
 
 ---
 
@@ -145,39 +146,10 @@ The API is documented using **Postman**. You can view the documentation interact
               "name": "Veggie Delight",
               "price": 9.99,
               "totalSold": 120
-            }
+            },{...},{...},...
           ]
         }
 
-     }
-     ```
-
-2. **Create Menu Item** (Admins only):
-    it 
-   ```http
-   POST /api/v1/menu/admin/add
-   ```
-    - Response:
-     ```json
-     {
-        "success": true,
-        "message": "Top selling items retrieved successfully",
-        "data": {
-          "topItems": [
-            {
-              "itemID": 1,
-              "totalSold": 150,
-              "name": "Classic Burger",
-              "price": 12.99
-            },
-            {
-              "itemID": 2,
-              "totalSold": 120,
-              "name": "Veggie Delight",
-              "price": 9.99
-            }
-          ]
-        }
      }
      ```
 
