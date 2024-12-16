@@ -118,8 +118,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
 
 The API is documented using **Postman**. You can view the documentation interactively:
 
-- **Postman**: Import the provided Postman collection from the repository. or visit `https://www.postman.com/notnull-7187/workspace/restaurant-documentation/collection/25350743-10a07f45-b8c2-4747-a730-e2ab2106bab1?action=share&creator=25350743`
-
+- **Postman**: Import the provided Postman collection from the repository.
 ### Sample Endpoints
 
 #### Menu Management
