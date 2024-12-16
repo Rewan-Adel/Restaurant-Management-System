@@ -96,10 +96,11 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
      DB_HOST        = localhost
      DB_USER        = your_db_user
      DB_PASS        = your_db_password
-     DB_NAME        = restaurant_db
+     DB_NAME        = restaurant
 
      TOKEN_SECRET   = your_secret_key
      JWT_EXPIRATION = 7d
+     
      EMAIL_SENDER   = rewanadel1266@gmail.com  
      EMAIL_PASSWORD = qccn pnhg skyj esdm
      ```
