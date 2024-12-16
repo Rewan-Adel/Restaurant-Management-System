@@ -18,8 +18,6 @@ const e = require('express');
  *  - `token`: The JWT token for the user.
  */
 exports.register = async (req, res) =>{
-    console.log(req.body);
-    
     const { error, value } = registerValidation(req.body);
     if (error) return failedResponse(res, error.details[0].message);
     try {
@@ -48,6 +46,9 @@ exports.login = async(req, res) =>{
     if (error) return failedResponse(res, error.details[0].message);
     try {
         const user = await User.findOne({ where: { email: value.email } });
+        console.log(user.password);
+        console.log(await bcrypt.compare(value.password, user.password))
+        
         if(!user || !await bcrypt.compare(value.password, user.password))
             return failedResponse(res, "Invalid email or password");
         const token = generateToken(user);
@@ -100,20 +101,19 @@ exports.verifyAndResetPass = async (req, res) => {
 
     if (!user) 
         return failedResponse(res, 'Invalid email address');
-    
-    if(user.passResetToken === null){
-        return failedResponse(res, 'You have already reset your password');
-    };
 
-    if ( !await bcrypt.compare(code.toString(), user.passResetToken))
+    else if(user.passResetToken === null)
+        return failedResponse(res, 'You have already reset your password');
+
+    else if ( !await bcrypt.compare(code.toString(), user.passResetToken))
         return failedResponse(res, 'Invalid Verification code.');
     
-    if (!newPassword || newPassword.length < 6) 
+    else if (!newPassword || newPassword.length < 6) 
         return failedResponse(res, 'Password must be at least 6 characters long');
     
     user.password        = req.body.newPassword;  
     user.passResetToken  = null;
-    user.passResetExpire =  null;
+    user.passResetExpire = null;
     await user.save();
 
     const token =  generateToken(user);

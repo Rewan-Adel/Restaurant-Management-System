@@ -20,7 +20,7 @@ module.exports = async(orders) => {
                 orderID: order.id,
                 number: order.number,
                 total: order.total,
-                itemsQuantity: order.itemsQuantity,
+                itemsQuantity: order._previousDataValues.itemsQuantity,
                 status: order.status,
                 createdAt: order.createdAt.toISOString().split('T')[0],
                 orderedBy: order.orderedBy.username

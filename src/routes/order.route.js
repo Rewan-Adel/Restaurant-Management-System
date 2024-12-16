@@ -12,18 +12,17 @@ const {
     markOrderAsCompleted,
     report
 } = require('../controllers/order.controller');
-const { isAuthenticated, isAdmin } = require('../middlewares/auth');
+const { isAuthenticated, isAdmin, isStaff } = require('../middlewares/auth');
 
 router.use(isAuthenticated);
-
-router.post('/new', createOrder);
-router.get('/all', getOrdersByStaff);
-router.get('/one/:orderID', getOneOrderByStaff);
-router.put('/complete/:orderID', markOrderAsCompleted);
-
-//For both staff and admin
 router.put('/add/:orderID', addItemsToOrder);
 router.put('/remove/:orderID', removeItemsFromOrder);
+
+
+router.post('/new', isStaff,createOrder);
+router.get('/all', isStaff, getOrdersByStaff);
+router.get('/one/:orderID',isStaff, getOneOrderByStaff);
+router.put('/complete/:orderID',isStaff, markOrderAsCompleted);
 
 
 router.use(isAdmin);
@@ -31,5 +30,6 @@ router.get('/admin/all', getAllOrders);
 router.get('/admin/one/:orderID', getOneOrder);
 router.put('/admin/mark/:orderID', changeOrderStatus);
 router.delete('/admin/delete/:orderID', deleteOrder);
+router.get('/admin/report', report);
 
 module.exports = router;

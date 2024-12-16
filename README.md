@@ -263,6 +263,92 @@ The API is documented using **Postman**. You can view the documentation interact
     }
      }
      ```
+
+3. **Get All Orders for staff member**:
+    - this endpoint get all orders that ordered by authenticated staff member 
+   ```http
+   PUT /api/v1/orders
+   ```
+  - Response:
+     ```json
+     {
+        "status": true,
+    "message": "Orders retrieved successfully",
+    "data": {
+        "order": {
+            "id": 2,
+            "userID": 2,
+            "total": "22.47",
+            "status": "completed",
+            "number": 1002,
+            "createdAt": "2024-12-05T11:00:00.000Z",
+            "updatedAt": "2024-12-15T22:14:01.265Z",
+            "orderedBy": {
+                "id": 2,
+                "username": "staff 1"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "name": "Classic Burger",
+                    "price": "8.99",
+                    "order_items": {
+                        "price": "4.99",
+                        "quantity": 2
+                    }
+                },
+                {...},{...},...
+            ]
+        },
+        {...},
+        {...}, ...
+    }
+     }
+     ```
+
+4. **Get All Orders for admins**:
+    - this endpoint get all orders in database by authenticated admin 
+   ```http
+   PUT /api/v1/orders/admin
+   ```
+  - Response:
+     ```json
+     {
+        "status": true,
+    "message": "Orders retrieved successfully",
+    "data": {
+        "order": {
+            "id": 2,
+            "userID": 2,
+            "total": "22.47",
+            "status": "completed",
+            "number": 1002,
+            "createdAt": "2024-12-05T11:00:00.000Z",
+            "updatedAt": "2024-12-15T22:14:01.265Z",
+            "orderedBy": {
+                "id": 2,
+                "username": "staff 1"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "name": "Classic Burger",
+                    "price": "8.99",
+                    "order_items": {
+                        "price": "4.99",
+                        "quantity": 2
+                    }
+                },
+                {...},{...},...
+            ]
+        },
+        {...},
+        {...}, ...
+      }
+     }
+     ```
+
+
 ## Testing
 
 Run automated tests:

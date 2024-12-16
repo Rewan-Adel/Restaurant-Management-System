@@ -49,7 +49,7 @@ exports.isAdmin = async(req, res, next) => {
         const {id} = req.user;
         const user = await User.findByPk(id);
         if(user.role !== 'admin'){
-            return failedResponse(res, 'You do not have the permissions.', 403);
+            return failedResponse(res, 'You do not have the permissions.Only admin can access.',null, 403);
         }
         next();
     }
@@ -57,3 +57,17 @@ exports.isAdmin = async(req, res, next) => {
         console.log(error);
         return failedResponse(res, 'Unauthorized', 401);
 }};
+
+exports.isStaff = async(req, res, next) => {
+    try{
+        const {id} = req.user;
+        const user = await User.findByPk(id);
+        if(user.role !== 'staff'){
+            return failedResponse(res, 'You do not have the permissions. Only staff can access.',null, 403);
+        }
+        next();
+    }
+    catch(error){
+        console.log(error);
+        return failedResponse(res, 'Unauthorized', 401);
+}}

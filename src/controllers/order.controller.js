@@ -100,8 +100,6 @@ exports.getOrdersByStaff= async (req, res)=>{
     const page = parseInt(req.query.page) || 1;    
     const {limit, offset} = pagination(page);
     try{
-        console.log(req.user.id);
-        
         const orders = await Order.findAndCountAll({
             limit,
             offset,
@@ -120,6 +118,7 @@ exports.getOrdersByStaff= async (req, res)=>{
                 }
             ]
         });
+
         return successResponse(res, "Orders retrieved successfully", {
             orders: orders.rows,
             total: orders.count,
@@ -145,6 +144,7 @@ exports.getOneOrderByStaff= async (req, res)=>{
     if(!orderID) return failedResponse(res, "Order ID is required", null, 400);
     try{
         const order = await Order.findByPk(orderID,{
+            where: {userID: req.user.id},
             include: [
                 {
                     model: User,
@@ -230,7 +230,7 @@ exports.addItemsToOrder= async (req, res)=>{
         const order = await Order.findByPk(orderID);
         if(!order) return failedResponse(res, "Order not found", null, 404);
         
-        if(order.status !== "pending" && order.status !== 'completed') return failedResponse(res, `Order is ${order.status}. Can't add or remove more items.`, null, 400);
+        if(order.status !== "pending") return failedResponse(res, `Order is ${order.status}. Can't add or remove more items.`, null, 400);
         
         let totalPrice    = parseFloat(order.total);
         let notFoundItems = [];
@@ -310,15 +310,15 @@ exports.removeItemsFromOrder= async (req, res)=>{
         const order = await Order.findByPk(orderID);
         if(!order) return failedResponse(res, "Order not found", null, 404);
         
-        if(order.status !== "pending" && order.status !== 'completed') return failedResponse(res, `Order is ${order.status}. Can't add or remove more items.`, null, 400);
+        if(order.status !== "pending") return failedResponse(res, `Order is ${order.status}. Can't add or remove more items.`, null, 400);
         let totalPrice    = parseFloat(order.total);
         let notFoundItems = [];
         let itemsData     = [];
-        let orderItem;
+
         for(const data of items){
             const {itemID, quantity} = data;
             const item = await Item.findByPk(itemID);
-            orderItem = await OrderItem.findOne({
+            const orderItem = await OrderItem.findOne({
                 where: {
                     orderID: orderID,
                     itemID: itemID
@@ -341,7 +341,15 @@ exports.removeItemsFromOrder= async (req, res)=>{
         };
         order.total = totalPrice;
         await order.save();
+
         for(const item of itemsData){
+            const orderItem = await OrderItem.findOne({
+                where: {
+                    orderID: orderID,
+                    itemID: item.id
+                }
+            });
+
             if(orderItem.quantity < item.quantity || orderItem.quantity === item.quantity){
                 await orderItem.destroy();
             }else{
@@ -379,13 +387,12 @@ exports.removeItemsFromOrder= async (req, res)=>{
  * */
 exports.changeOrderStatus= async (req, res)=>{
         const {orderID} = req.params;
-        const {status}  = req.body;
+        const status    = req.query.status || 'completed';
         if(!orderID) return failedResponse(res, "Order ID is required", null, 400);
 
         try{
             let order = await Order.findByPk(orderID);
             if(!order) return failedResponse(res, "Order not found", null, 404);
-            if(!status) return failedResponse(res, "Status is required", null, 400);
             if(status !== 'pending' && status !== 'completed' && status !== 'cancelled'){
                 return failedResponse(res, "Invalid status. Status can only be pending, completed or cancelled", null, 400);
             };
@@ -555,7 +562,6 @@ exports.report = async (req, res) => {
         });
 
         await csvWriter(orders);
-        
         const ordersCount = orders.length;
         return successResponse(res, "The CSV file was written successfully", {
             orders: orders,
