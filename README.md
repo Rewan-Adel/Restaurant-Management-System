@@ -349,7 +349,7 @@ The API is documented using **Postman**. You can view the documentation interact
      ```
 
 ## Forgot Password Api
-- When a user forgets their password, an email is sent:
+- When a users forgets their password, an email is sent:
 ![resetEmail](./images//Screenshot%202023-11-11%20202343.png)
 
 
