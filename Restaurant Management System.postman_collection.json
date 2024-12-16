@@ -40,7 +40,7 @@
 										"add"
 									]
 								},
-								"description": "The API endpoint `{{baseUrl}}api/v1/menu/admin/add` is a POST request used to add a new menu item. The request should include a JSON payload in the raw request body type with the following parameters:\n\n- `name` (string): The name of the menu item.\n    \n- `description` (string): Description of the menu item.\n    \n- `category` (string): Category of the menu item.\n    \n- `price` (number): Price of the menu item.\n    \n\n### Response\n\nThe response for this request is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"item\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"number\"\n            },\n            \"name\": {\n              \"type\": \"string\"\n            },\n            \"description\": {\n              \"type\": \"string\"\n            },\n            \"price\": {\n              \"type\": \"number\"\n            },\n            \"categoryID\": {\n              \"type\": \"number\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```\n\nThe response data includes a boolean `status`, a string `message`, and a nested `data` object containing an `item` object with properties such as `id`, `name`, `description`, `price`, `categoryID`, `updatedAt`, and `createdAt`.\n\nAdditionally, related responses from other endpoints of the API return a list of menu items with similar data models, including `id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, and `category` details.\n\nThe response returns a 200 status code upon successful execution."
+								"description": "The API endpoint `{{baseUrl}}api/v1/menu/admin/add` is a POST request used to add a new menu item. The request should include a JSON payload in the raw request body type with the following parameters:\n\n- `name` (string): The name of the menu item.\n    \n- `description` (string): Description of the menu item.\n    \n- `category` (string): Category of the menu item.\n    \n- `price` (number): Price of the menu item.\n    \n\n### Response\n\nThe response for this request is a JSON object with the following schema:\n\n``` json\n{\n    \"status\":  true,\n    \"message\": \"Item created successfully\",\n    \"data\": {\n       \"item\": {\n            \"id\": ,\n            \"name\":  \"string\",\n            \"description\": \"string\",\n            \"price\":  \"number\",\n            \"categoryID\": \"number\",\n            \"updatedAt\": \"string\",\n            \"createdAt\": \"string\",\n           }\n       }\n}\n\n ```\n\nThe response data includes a boolean `status`, a string `message`, and a nested `data` object containing an `item` object with properties such as `id`, `name`, `description`, `price`, `categoryID`, `updatedAt`, and `createdAt`.\n\nAdditionally, related responses from other endpoints of the API return a list of menu items with similar data models, including `id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, and `category` details.\n\nThe response returns a 200 status code upon successful execution."
 							},
 							"response": [
 								{
@@ -266,7 +266,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"status\": false,\n    \"message\": \"You do not have the permissions.\",\n    \"data\": 403\n}"
+									"body": "{\n    \"status\": false,\n    \"message\": \"You do not have the permissions.Only admin can access.\",\n    \"data\": 403\n}"
 								},
 								{
 									"name": "example 3",
@@ -2368,11 +2368,14 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}api/v1/order/all",
+											"raw": "http://localhost:8080/api/v1/order/all",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"order",
 												"all"
@@ -2608,11 +2611,14 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}api/v1/order/one/:orderID",
+											"raw": "http://localhost:8080/api/v1/order/one/:orderID",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}api"
+												"localhost"
 											],
+											"port": "8080",
 											"path": [
+												"api",
 												"v1",
 												"order",
 												"one",
