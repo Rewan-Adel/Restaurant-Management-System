@@ -538,7 +538,6 @@ exports.report = async (req, res) => {
                 'createdAt'
             ],
             where: {
-                status: 'completed',
                 createdAt: {
                     [Op.between]: [startDate, endDate]
                 }
