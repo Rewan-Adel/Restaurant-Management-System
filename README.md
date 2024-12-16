@@ -153,35 +153,6 @@ The API is documented using **Postman**. You can view the documentation interact
      }
      ```
 
-2. **Create Menu Item** (Admins only):
-    it 
-   ```http
-   POST /api/v1/menu/admin/add
-   ```
-    - Response:
-     ```json
-     {
-        "success": true,
-        "message": "Top selling items retrieved successfully",
-        "data": {
-          "topItems": [
-            {
-              "itemID": 1,
-              "totalSold": 150,
-              "name": "Classic Burger",
-              "price": 12.99
-            },
-            {
-              "itemID": 2,
-              "totalSold": 120,
-              "name": "Veggie Delight",
-              "price": 9.99
-            }
-          ]
-        }
-     }
-     ```
-
 2. **Get Menu Items**:
 
    ```http
