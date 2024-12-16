@@ -92,7 +92,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
    - Add the following variables:
      ```env
      NODE_ENV       = development
-     PORT           = 3000
+     PORT           = 8080
      DB_HOST        = localhost
      DB_USER        = your_db_user
      DB_PASS        = your_db_password
@@ -110,7 +110,7 @@ This is a **Simplified Restaurant Management System API** that supports **menu m
    npm start
    ```
 
-   The server will run on `http://localhost:3000` by default.
+   The server will run on `http://localhost:8080` by default.
 
 ---
 
