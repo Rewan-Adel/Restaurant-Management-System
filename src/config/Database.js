@@ -57,7 +57,7 @@ class Database {
             await this.sequelize.authenticate();
             console.log('Database connected successfully.');
         } catch (error) {
-            console.log('Unable to connect to the database:', error);
+            console.log('Unable to connect to the database:', error.message);
         }
     };
 
